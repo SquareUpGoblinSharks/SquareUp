@@ -8,7 +8,7 @@ module.exports = router;
 
 router.get();
 
-router.post('/', contollers.createProfile, (req, res) => {
+router.post('/', controllers.createProfile, (req, res) => {
   res.status(200).json(res.locals.newProfile);
 });
 
