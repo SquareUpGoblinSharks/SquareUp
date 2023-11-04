@@ -6,10 +6,13 @@ const router = express.Router();
 
 module.exports = router;
 
-router.get();
-
-router.post('/', controllers.createProfile, (req, res) => {
+//mongodb
+router.get('/');
+//posting to the database for a new profile
+router.post('/', contollers.createProfile, (req, res) => {
   res.status(200).json(res.locals.newProfile);
 });
+
+
 
 router.update();
