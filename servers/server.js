@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+
 const mongoose = require('mongoose');
 
 const Controller = require('./controllers')
@@ -54,5 +55,3 @@ app.use((err, req, res, next) => {
   });
   
 app.listen(PORT, ()=>{ console.log(`Listening on port ${PORT}...`); });
-  
-module.exports = app;
