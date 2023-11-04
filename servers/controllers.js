@@ -5,6 +5,25 @@ const Controller = {};
 
 // insert another middleware here to to retrive info from database and display
 
+Controller.getProfile = (req, res, next) => {
+  models.Profiles.find({})
+    .exec()
+    .then((data) => {
+      console.log('FINDING USER DATA:', data);
+      return next();
+    })
+    .catch((err) => {
+      return next({
+        log: 'Error in controller.getProfile middleware',
+        message: {
+          err: 'there was an error grabbing profile data',
+        },
+      });
+    });
+};
+
+Controller.updateProfile = (req, res, next) => {};
+
 Controller.createUser = (req, res, next) => {
   const {
     name,
@@ -50,7 +69,7 @@ Controller.createUser = (req, res, next) => {
 Controllers.getProfile = (req, res, next) => {
   const { username, password } = req.body;
   User.findOne({ username: username })
-    .then(user => {
+    .then((user) => {
       if (!user) {
         res.status(401);
         return res.redirect('./signup');
@@ -66,12 +85,12 @@ Controllers.getProfile = (req, res, next) => {
         }
         res.redirect('./secret');
         return next();
-      })
+      });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log('Error verifying user', err);
       next(err);
-    })
+    });
 };
 
 module.exports = Controller;
