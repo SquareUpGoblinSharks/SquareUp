@@ -1,16 +1,16 @@
 const express = require('express');
 const path = require('path');
-
 const mongoose = require('mongoose');
-
 const Controller = require('./controllers')
 
 const PORT = 3000;
 
 const app = express();
 
-const mongoURI = process.env.NODE_ENV === 'test' ? 'mongodb://localhost/SquareUp' : 'mongodb://localhost/SquareUp';
-mongoose.connect(mongoURI);
+// this is temporary, insert real url later
+// created in models.js so not needed here
+// const mongoURI = process.env.NODE_ENV === 'test' ? 'mongodb://localhost/SquareUp' : 'mongodb://localhost/SquareUp';
+// mongoose.connect(mongoURI);
 
 // automatically parse url encoded body content and form data rom incoming requrests and place it in req.body
 app.use(express.json());
@@ -55,3 +55,5 @@ app.use((err, req, res, next) => {
   });
   
 app.listen(PORT, ()=>{ console.log(`Listening on port ${PORT}...`); });
+
+module.exports = app;

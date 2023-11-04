@@ -1,9 +1,11 @@
+const User = require('./models');
+const bcrypt = require('bcryptjs');
 
-const models = require('./models');
+const Controller = {};
 
-const controllers = {};
+// insert another middleware here to to retrive info from database and display
 
-controllers.createProfile = (req, res, next) => {
+Controller.createUser = (req, res, next) => {
   const {
     name,
     username,
@@ -45,4 +47,31 @@ controllers.createProfile = (req, res, next) => {
     });
 };
 
-controllers.getProfile = (req, res, next) => {};
+Controllers.getProfile = (req, res, next) => {
+  const { username, password } = req.body;
+  User.findOne({ username: username })
+    .then(user => {
+      if (!user) {
+        res.status(401);
+        return res.redirect('./signup');
+      }
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (err) {
+          console.log('Error verifying user', err);
+          return next(err);
+        }
+        if (!isMatch) {
+          res.status(401);
+          return res.redirect('/signup');
+        }
+        res.redirect('./secret');
+        return next();
+      })
+    })
+    .catch(err => {
+      console.log('Error verifying user', err);
+      next(err);
+    })
+};
+
+module.exports = Controller;
