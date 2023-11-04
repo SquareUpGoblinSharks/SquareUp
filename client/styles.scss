@@ -1,0 +1,27 @@
+.middleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  height: 1600px;
+  width: 1300px;
+
+  .profilePicture {
+    border: 1px solid black;
+    height: 500px;
+    width: 500px;
+  }
+  .stats {
+    border: 1px solid black;
+    height: 500px;
+    width: 500px;
+  }
+}
