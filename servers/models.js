@@ -52,13 +52,15 @@ const profileSchema = new Schema({
     type: String,
     required: true,
   },
+  wins: [{ type: String }],
+  loss: [{ type: String }],
   totalWins: {
     type: Number,
-    required: true,
+    default: 0,
   },
   totalLosses: {
     type: Number,
-    required: true,
+    default: 0,
   },
 });
 

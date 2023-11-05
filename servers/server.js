@@ -18,10 +18,15 @@ app.use(express.urlencoded());
 
 app.use('./client', express.static(path.resolve(__dirname, '../client')));
 
+//on render for the root get all profiles, right now set to 30 random profiles
+app.use('/', Controllers.getProfile, (req, res) => {
+  res.status(200).json();
+});
+
 // express routes
 //WHERE ARE WE ROUTING TO FOR APP.GET !!!!!!!!!!!!!
 // root
-app.get('./', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.jsx'));
 });
 
