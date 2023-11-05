@@ -34,7 +34,7 @@ Controller.updateWinsLosses = (req, res, next) => {
       if (win) {
         data.totalWins += 1;
       } else {
-        data.totalLossesloss += 1;
+        data.totalLosses += 1;
       }
       return data.save();
     })

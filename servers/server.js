@@ -19,7 +19,7 @@ app.use(express.urlencoded());
 app.use('./client', express.static(path.resolve(__dirname, '../client')));
 
 //on render for the root get all profiles, right now set to 30 random profiles
-app.use('/', Controllers.getProfile, (req, res) => {
+app.get('/', Controllers.getProfile, (req, res) => {
   res.status(200).json();
 });
 

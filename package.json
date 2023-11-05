@@ -8,7 +8,8 @@
     "client": "webpack serve --open ",
     "server": "nodemon server/server.js",
     "dev": "npm run client & npm run server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js"
   },
   "keywords": [],
   "author": "",
