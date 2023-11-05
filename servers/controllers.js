@@ -1,12 +1,14 @@
-const User = require('./models');
+const { Profiles } = require('./models');
 const bcrypt = require('bcryptjs');
 
 const Controller = {};
 
 // insert another middleware here to to retrive info from database and display
-
+//gets all profiles in the mongodb
 Controller.getProfile = (req, res, next) => {
-  models.Profiles.find({})
+  const profileSize = 30;
+
+  Profiles.aggregate([{ $sample: { size: profileSize } }])
     .exec()
     .then((data) => {
       console.log('FINDING USER DATA:', data);
@@ -22,7 +24,48 @@ Controller.getProfile = (req, res, next) => {
     });
 };
 
-Controller.updateProfile = (req, res, next) => {};
+//controls that update wins and losses in the two sparring partners.
+Controller.updateWinsLosses = (req, res, next) => {
+  const { username, opponent, win } = req.body;
+
+  Profiles.findOne({ username: username })
+    .exec()
+    .then((data) => {
+      if (win) {
+        data.totalWins += 1;
+      } else {
+        data.totalLossesloss += 1;
+      }
+      return data.save();
+    })
+    .catch((err) => {
+      return next({
+        log: 'Error in updating updateWinsandLosses in controllers',
+        message: {
+          err: 'there was an error in updating wins and losses',
+        },
+      });
+    });
+
+  Profiles.findOne({ username: opponent })
+    .exec()
+    .then((opponent) => {
+      if (win) {
+        opponent.totalLosses += 1;
+      } else {
+        opponent.totalWins += 1;
+      }
+      return data.save();
+    })
+    .catch((err) => {
+      return next({
+        log: 'Error in updating updateWinsandLosses in controllers',
+        message: {
+          err: 'there was an error in updating wins and losses',
+        },
+      });
+    });
+};
 
 Controller.createUser = (req, res, next) => {
   const {
@@ -38,7 +81,7 @@ Controller.createUser = (req, res, next) => {
     totalLosses,
   } = req.body;
 
-  models.Profiles.create({
+  Profiles.create({
     name,
     username,
     password,
@@ -68,7 +111,7 @@ Controller.createUser = (req, res, next) => {
 
 Controllers.getProfile = (req, res, next) => {
   const { username, password } = req.body;
-  User.findOne({ username: username })
+  Profiles.findOne({ username: username })
     .then((user) => {
       if (!user) {
         res.status(401);
