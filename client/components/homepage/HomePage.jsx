@@ -1,7 +1,7 @@
 import React from 'react';
-import Profile from './Profile.jsx';
+import Profile from '../../Profile';
 
-const Test = () => {
+const HomePage = () => {
   return (
     <>
       <div className="middleContainer">
@@ -17,4 +17,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default HomePage;
