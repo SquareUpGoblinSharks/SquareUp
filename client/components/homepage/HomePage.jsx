@@ -4,7 +4,12 @@ import Leaderboard from './Leaderboard.jsx';
 import UpcomingMatches from './UpcomingMatches';
 import ButtonBar from './ButtonBar.jsx';
 
+// useEffect(() => {
+
+// }, [Profile])
+
 const HomePage = () => {
+
   return (
     <div className="mainContainer">
       <div className="leftContainer">
