@@ -22,10 +22,10 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      state.user = action.payload[0];
+      state.user = action.payload;
     },
     getUsers: (state, action) => {
-      state.users = action.payload[0];
+      state.users = action.payload;
     },
     addMatch: (state, action) => {
       state.users.push(action.payload);

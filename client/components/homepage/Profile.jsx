@@ -1,7 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
+  const users = useSelector((state) => state.users);
 
+  console.log('TESTING------------', users);
   
   return (
     <div className="profileContainer">
