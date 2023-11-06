@@ -3,7 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const Controller = require('./controllers');
 
-const PORT = 3000;
+const PORT = 8000;
 
 const app = express();
 
@@ -14,15 +14,20 @@ const app = express();
 
 // automatically parse url encoded body content and form data rom incoming requrests and place it in req.body
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
-app.use('./client', express.static(path.resolve(__dirname, '../client')));
+app.use('/client', express.static(path.resolve(__dirname, '../client')));
 
 //on render for the root get all profiles, right now set to 30 random profiles
-app.use('/', Controllers.getProfile, (req, res) => {
-  res.status(200).json();
+//Test is the homepage
+app.get('/Test', Controller.getProfile, (req, res) => {
+  console.log('testing get route');
+  res.status(200).json(res.locals.profiles);
 });
 
+app.post('/', Controller.createUser, (req, res) => {
+  res.status(200).json();
+});
 // express routes
 //WHERE ARE WE ROUTING TO FOR APP.GET !!!!!!!!!!!!!
 // root
@@ -32,19 +37,19 @@ app.get('/', (req, res) => {
 
 // signup
 // redirect to the sign up page when a sign up button gets pushed
-app.get('./signup', (req, res) => {
+app.get('/signup', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/signup.jsx'));
 });
 
 // this is for after you enter your information
 // creates user and then redirects them to the homepage
-app.post('./signup', Controller.createUser, (req, res) => {
+app.post('/signup', Controller.createUser, (req, res) => {
   res.status(200);
   res.redirect('/index.html');
 });
 
 // login
-app.post('./login', Controller.verifyUser, (req, res) => {
+app.post('/login', Controller.verifyUser, (req, res) => {
   res.status(200);
   res.redirect('./index.html');
 });

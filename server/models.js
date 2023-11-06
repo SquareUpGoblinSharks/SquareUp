@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-mongoose.set('useFindAndModify', false);
-
 const MONGO_URI =
   'mongodb+srv://bnlee419:brian0419@cluster0.tqcvw05.mongodb.net/?retryWrites=true&w=majority';
 
@@ -66,6 +64,4 @@ const profileSchema = new Schema({
 
 const Profiles = mongoose.model('profile', profileSchema);
 
-module.exports = {
-  Profiles,
-};
+module.exports = Profiles;
