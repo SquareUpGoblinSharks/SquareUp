@@ -1,7 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../state/userSlice';
+import { redirect, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getUsers, login } from '../../state/userSlice';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -18,9 +18,9 @@ const Login = () => {
     const password = event.target.elements.password.value;
     console.log('username: ', username);
     console.log('password: ', password);
-    const url = 'http://localhost:8000/login';
     try {
-      const response = await fetch(url, {
+      // Fetch user info
+      const userResponse = await fetch('http://localhost:8000/login', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -30,11 +30,19 @@ const Login = () => {
           password: password,
         }),
       });
-      const userInfo = await response.json();
+      const userInfo = await userResponse.json();
       console.log('TESTING', userInfo);
       dispatch(login(userInfo));
-      if (response.ok) {
-        navigate('/');
+
+      // If user info successfully fetched, fetch all users info (to use on the HomePage), and then navigate to '/';
+      if (userResponse.ok) {
+        const allUsersResponse = await fetch('http://localhost:8000/HomePage');
+        const allUsersInfo = await allUsersResponse.json();
+        console.log('TESTING', allUsersInfo);
+        dispatch(getUsers(allUsersInfo));
+        if (allUsersResponse.ok) {
+          navigate('/');
+        }
       }
     } catch (error) {
       throw new Error(error);
@@ -42,11 +50,17 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={onLoginHandler}>
-      <input name="username" type="text" placeholder="username" />
-      <input name="password" type="password" placeholder="password" />
-      <input type="submit" value="login" />
-    </form>
+    <div class='login'>
+      <div class='logo'><a>Square UP!</a></div>
+      <form onSubmit={onLoginHandler}>
+        <input name="username" type="text" placeholder="username" />
+        <input name="password" type="password" placeholder="password" />
+        <input class='button' type="submit" value="login" />
+        <button class='button' type='button' onClick={
+          () => {navigate('/signup')}
+        }>Create Account</button> 
+      </form>
+    </div>
   );
 };
 

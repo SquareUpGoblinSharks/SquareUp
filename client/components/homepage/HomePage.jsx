@@ -5,6 +5,10 @@ import UpcomingMatches from './UpcomingMatches';
 import ButtonBar from './ButtonBar.jsx';
 import LogoutAndEdit from './LogoutAndEdit.jsx'
 
+// useEffect(() => {
+
+// }, [Profile])
+
 const HomePage = () => {
   return (
     <div className="mainContainer">
@@ -13,7 +17,7 @@ const HomePage = () => {
       </div>
       <div className="middleContainer">
         <Profile />
-        <ButtonBar />
+        {/* <ButtonBar /> */}
       </div>
       <div className="rightContainer">
         <LogoutAndEdit />
