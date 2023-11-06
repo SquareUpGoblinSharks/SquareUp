@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const MONGO_URI =
   'mongodb+srv://bnlee419:brian0419@cluster0.tqcvw05.mongodb.net/?retryWrites=true&w=majority';
@@ -60,6 +61,24 @@ const profileSchema = new Schema({
     type: Number,
     default: 0,
   },
+});
+
+const SALT_WORK_FACTOR = 5;
+
+profileSchema.pre('save', async function (next) {
+  try {
+    if (this.isModified('password')) {
+      // Hash the password using bcrypt
+      const hashedPassword = await bcrypt.hash(this.password, SALT_WORK_FACTOR);
+
+      // Set the hashed password as the user's password
+      this.password = hashedPassword;
+      console.log('PASSWORD', this.password);
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 
 const Profiles = mongoose.model('profile', profileSchema);
