@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getUsers, login } from '../../state/userSlice';
 
@@ -50,11 +50,17 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={onLoginHandler}>
-      <input name="username" type="text" placeholder="username" />
-      <input name="password" type="password" placeholder="password" />
-      <input type="submit" value="login" />
-    </form>
+    <div class='login'>
+      <div class='logo'><a>Square UP!</a></div>
+      <form onSubmit={onLoginHandler}>
+        <input name="username" type="text" placeholder="username" />
+        <input name="password" type="password" placeholder="password" />
+        <input class='button' type="submit" value="login" />
+        <button class='button' type='button' onClick={
+          () => {navigate('/signup')}
+        }>Create Account</button> 
+      </form>
+    </div>
   );
 };
 
