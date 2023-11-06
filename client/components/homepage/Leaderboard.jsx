@@ -11,7 +11,6 @@ const Leaderboard = () => {
         <table>
           <thead>
             <tr>
-              <th id="profileIcon"></th>
               <th id="name">Name</th>
               <th id="city">City</th>
               <th id="rank">Rank</th>
