@@ -9,7 +9,6 @@ import ButtonBar from './ButtonBar.jsx';
 // }, [Profile])
 
 const HomePage = () => {
-
   return (
     <div className="mainContainer">
       <div className="leftContainer">
@@ -17,7 +16,7 @@ const HomePage = () => {
       </div>
       <div className="middleContainer">
         <Profile />
-        <ButtonBar />
+        {/* <ButtonBar /> */}
       </div>
       <div className="rightContainer">
         <UpcomingMatches />
