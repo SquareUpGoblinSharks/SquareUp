@@ -2,6 +2,7 @@ import React from 'react';
 
 const Signup = () => {
   return (
+    <div class='signup'>
     <div className="sign-container">
       <form method="POST" action="/signup" className="signForm">
         <div className="form-group">
@@ -78,6 +79,7 @@ const Signup = () => {
         </div>
         <input type="submit" value="Create User" className="submit-btn" />
       </form>
+    </div>
     </div>
   );
 };
