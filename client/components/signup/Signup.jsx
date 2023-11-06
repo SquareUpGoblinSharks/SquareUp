@@ -1,9 +1,14 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
+const onSignupHandler = (event) => {
+  event.preventDefault();
+};
 
 const Signup = () => {
   return (
     <div className="sign-container">
-      <form method="POST" action="/signup" className="signForm">
+      <form className="signForm" onSubmit={onSignupHandler}>
         <div className="form-group">
           <label htmlFor="username" className="form-label">
             Username:
