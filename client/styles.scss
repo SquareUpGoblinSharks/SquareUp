@@ -23,6 +23,11 @@
     margin-left: 10px;
     margin-top: 20px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-family: 'Roboto Mono', monospace;
+    color: white;
+    font-size: 15px;
+    background-image: url('https://images.unsplash.com/photo-1574451311245-6bceb7e258c2?q=80&w=3269&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: 100% 100%;
   }
 }
 
@@ -52,8 +57,9 @@ th {
 }
 
 thead th {
-  background-color: #1b2241;
+  // background-color: #1b2241;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-color: rgba(0, 0, 0, 0.0);
 }
 
 tbody tr:hover {
@@ -173,8 +179,12 @@ tbody td:hover::before {
     border-radius: 15px;
     margin-right: 10px;
     margin-top: 20px;
-    background-color: lightsalmon;
+    background-image: url('https://images.unsplash.com/photo-1563089144-b764c97a24e9?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: 100% 100%;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-family: 'Roboto Mono', monospace;
+    color: white;
+    font-size: 18px;
   }
 }
 
