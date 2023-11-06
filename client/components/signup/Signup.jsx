@@ -1,8 +1,32 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-const onSignupHandler = (event) => {
+const onSignupHandler = async (event) => {
   event.preventDefault();
+  const username = event.target.elements.username.value;
+  const password = event.target.elements.password.value;
+  const age = event.target.elements.age.value;
+  const height = event.target.elements.height.value;
+  const weight = event.target.elements.weight.value;
+  const fightingStyle = event.target.elements.fightingStyle.value;
+  const location = event.target.elements.location.value;
+  console.log(event.target.elements.profilePicture.files[0]);
+  const profilePicture = event.target.elements.profilePicture.files[0];
+  const formData = new FormData();
+  formData.append('profilePicture', profilePicture);
+
+  try {
+    const response = await fetch('')
+  } catch (error) {
+
+  }
+
+  // const profilePicture = URL.createObjectURL(
+  //   new Blob([event.target.elements.profilePicture.files[0]], {
+  //     type: 'image/png',
+  //   })
+  // );
+  console.log(profilePicture);
 };
 
 const Signup = () => {
@@ -78,6 +102,18 @@ const Signup = () => {
             id="location"
             name="location"
             type="text"
+            className="form-input"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="profilePicture" className="form-label">
+            Profile Picture:
+          </label>
+          <input
+            id="profilePicture"
+            name="profilePicture"
+            type="file"
+            accept="image/gif, image/jpeg, image/png"
             className="form-input"
           />
         </div>

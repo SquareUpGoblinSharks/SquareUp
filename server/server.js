@@ -21,6 +21,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/client', express.static(path.resolve(__dirname, '../client')));
 
+app.post('/profilepicture', (req, res) => {
+  res.status(200).json();
+});
+
 //on render for the root get all profiles, right now set to 30 random profiles
 //Test is the homepage
 app.get('/HomePage', Controller.getProfile, (req, res) => {

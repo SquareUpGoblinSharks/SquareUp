@@ -2,10 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const Profile = () => {
-  const users = useSelector((state) => state.users);
-
-  console.log('TESTING------------', users);
-  
+  const users = useSelector(({userSlice}) => userSlice.users);
+    
   return (
     <div className="profileContainer">
       <div className="profilePicture">PROFILE PICTURE COMPONENT</div>
