@@ -2,12 +2,14 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const Controller = require('./controllers');
+const cors = require('cors');
+const dotenv = require('dotenv');
 
 //checking
 const PORT = 8000;
 
 const app = express();
-
+app.use(cors());
 // this is temporary, insert real url later
 // created in models.js so not needed here
 // const mongoURI = process.env.NODE_ENV === 'test' ? 'mongodb://localhost/SquareUp' : 'mongodb://localhost/SquareUp';
@@ -51,8 +53,7 @@ app.post('/signup', Controller.createUser, (req, res) => {
 
 // login
 app.post('/login', Controller.verifyUser, (req, res) => {
-  res.status(200);
-  res.redirect('./index.html');
+  res.status(200).json(res.locals.userInfo);
 });
 
 // error handling

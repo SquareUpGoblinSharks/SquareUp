@@ -116,12 +116,13 @@ Controller.createUser = (req, res, next) => {
 };
 
 Controller.verifyUser = (req, res, next) => {
+  console.log('TESTING');
   const { username, password } = req.body;
-  Profiles.findOne({ username: username })
+  Profiles.findOne({ username: username, password: password })
     .then((user) => {
       if (!user) {
         res.status(401);
-        return res.redirect('./signup');
+        // return res.redirect('/signup');
       }
       bcrypt.compare(password, user.password, (err, isMatch) => {
         if (err) {
@@ -130,9 +131,10 @@ Controller.verifyUser = (req, res, next) => {
         }
         if (!isMatch) {
           res.status(401);
-          return res.redirect('/signup');
+          // return res.redirect('/signup');
         }
-        res.redirect('./secret');
+        // console.log('user', user);
+        res.locals.userInfo = user;
         return next();
       });
     })

@@ -7,33 +7,35 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
   /**
    * When the submit button is clicked, initiates a fetch request to server.
    * Fetch request should return user information.
    * If fetch request succeeds and state is updated with user info, redirect to '/'.
-  */ 
+   */
   const onLoginHandler = async (event) => {
     event.preventDefault();
     const username = event.target.elements.username.value;
     const password = event.target.elements.password.value;
     console.log('username: ', username);
     console.log('password: ', password);
-    const url = '';
+    const url = 'http://localhost:8000/login';
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
         },
-        body: {
-          username: JSON.stringify(username),
-          password: JSON.stringify(password),
-        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
       });
       const userInfo = await response.json();
+      console.log('TESTING', userInfo);
       dispatch(login(userInfo));
-      navigate('/');
+      if (response.ok) {
+        navigate('/');
+      }
     } catch (error) {
       throw new Error(error);
     }
