@@ -12,6 +12,4 @@ const Profile = () => {
 };
 
 
-
-//return (  <div> HELO </div>  <div> BYE </div>)
 export default Profile;

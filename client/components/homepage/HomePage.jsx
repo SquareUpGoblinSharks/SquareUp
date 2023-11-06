@@ -3,6 +3,7 @@ import Profile from './Profile.jsx';
 import Leaderboard from './Leaderboard.jsx';
 import UpcomingMatches from './UpcomingMatches';
 import ButtonBar from './ButtonBar.jsx';
+import LogoutAndEdit from './LogoutAndEdit.jsx'
 
 const HomePage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage = () => {
         <ButtonBar />
       </div>
       <div className="rightContainer">
+        <LogoutAndEdit />
         <UpcomingMatches />
       </div>
     </div>
