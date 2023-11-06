@@ -10,7 +10,7 @@
 
 .leftContainer {
   height: 780px;
-  
+
   .leaderboard {
     display: flex;
     flex-direction: column;
@@ -80,8 +80,6 @@ tbody td:hover::before {
   background-color: rgba(255, 255, 255, 0.2);
   z-index: -1;
 }
-  
-
 
 
 .middleContainer {
@@ -168,7 +166,7 @@ tbody td:hover::before {
   transform: translateY(0.125rem);
 }
 
-.rightContainer { 
+.rightContainer {
   height: 780px;
 
 .upcomingMatches {
