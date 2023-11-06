@@ -1,5 +1,6 @@
-const { Profiles } = require('./models');
+const Profiles = require('./models');
 const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');
 
 const Controller = {};
 
@@ -7,10 +8,11 @@ const Controller = {};
 //gets all profiles in the mongodb
 Controller.getProfile = (req, res, next) => {
   const profileSize = 30;
-
+  console.log('test');
   Profiles.aggregate([{ $sample: { size: profileSize } }])
     .exec()
     .then((data) => {
+      res.locals.profiles = data;
       console.log('FINDING USER DATA:', data);
       return next();
     })
@@ -68,6 +70,7 @@ Controller.updateWinsLosses = (req, res, next) => {
 };
 
 Controller.createUser = (req, res, next) => {
+  console.log('REQUESTBODY', req.body);
   const {
     name,
     username,
@@ -78,6 +81,8 @@ Controller.createUser = (req, res, next) => {
     weight,
     fightingStyle,
     totalWins,
+    wins,
+    loss,
     totalLosses,
   } = req.body;
 
@@ -90,12 +95,13 @@ Controller.createUser = (req, res, next) => {
     height,
     weight,
     fightingStyle,
+    wins,
+    loss,
     totalWins,
     totalLosses,
   })
-    .exec()
     .then((data) => {
-      console.log('DATA', data);
+      // console.log('DATA', data);
       return next();
     })
     .catch((err) => {
@@ -109,7 +115,7 @@ Controller.createUser = (req, res, next) => {
     });
 };
 
-Controllers.getProfile = (req, res, next) => {
+Controller.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
   Profiles.findOne({ username: username })
     .then((user) => {
