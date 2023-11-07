@@ -74,7 +74,11 @@ app.get('/signup', (req, res) => {
 // this is for after you enter your information
 // creates user and then redirects them to the homepage
 app.post('/signup', Controller.createUser, (req, res) => {
+
+  res.status(200);
+
   res.status(200).json(res.locals.user);
+
 });
 
 // login

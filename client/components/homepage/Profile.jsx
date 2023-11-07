@@ -31,6 +31,14 @@ const Profile = () => {
     }
     setUserList((prev) => prev.slice(0, -1));
   };
+
+  const squareUpHandleClick = () => {
+    if (users.length === 1) {
+      return;
+    }
+    setUserList((prev) => prev.slice(0, -1));
+  };
+
   console.log(userList);
 
   //always render the last user on the array of object of the profiles
@@ -54,11 +62,13 @@ const Profile = () => {
         </div>
         // </div>
       )}
-      <ButtonBar passHandleClick={passHandleClick} />
+      <ButtonBar
+        passHandleClick={passHandleClick}
+        squareUpHandleClick={squareUpHandleClick}
+      />
     </div>
   );
 };
-
 
 //return (  <div> HELO </div>  <div> BYE </div>)
 
