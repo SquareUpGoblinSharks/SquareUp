@@ -5,19 +5,19 @@ import Login from './components/login/Login.jsx';
 import Signup from './components/signup/Signup.jsx';
 import HomePage from './components/homepage/HomePage.jsx';
 
-
 const App = () => {
   return (
     <Router>
       <Routes>
-
-        {<Route path="/" element={<HomePage />} />}
+        {<Route path="/home" element={<HomePage />} />}
         {/* {<Route path="/login" component={Login} />}
         {<Route path="/signup" component={Signup} />} */}
 
-        <Route path="/" element={<HomePage />} />
+        {/* <Route path="/" element={<HomePage />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+
+        {<Route path="*" element={<Login />} />}
         {/* <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} /> */}
 

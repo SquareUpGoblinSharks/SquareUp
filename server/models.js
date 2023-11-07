@@ -37,7 +37,6 @@ const profileSchema = new Schema({
   },
   profilePicture: {
     type: String,
-    required: true,
   },
   sex: {
     type: String,
