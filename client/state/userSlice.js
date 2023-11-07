@@ -22,7 +22,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      state.user = action.payload;
+      state.user = Object.assign(state.user, action.payload);
     },
     getUsers: (state, action) => {
       state.users = action.payload;
@@ -30,10 +30,9 @@ export const userSlice = createSlice({
     addMatch: (state, action) => {
       state.users.push(action.payload);
     },
-
   },
 });
 
-export const { login, getUsers, addMatch} = userSlice.actions;
+export const { login, getUsers, addMatch } = userSlice.actions;
 
 export default userSlice.reducer;

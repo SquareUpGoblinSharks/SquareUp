@@ -75,38 +75,34 @@ Controller.createUser = (req, res, next) => {
     name,
     username,
     password,
-    profilePicture,
     sex,
     height,
     weight,
     fightingStyle,
-    totalWins,
-    wins,
-    loss,
-    totalLosses,
   } = req.body;
 
   Profiles.create({
     name,
     username,
     password,
-    profilePicture,
+    profilePicture: 'none',
     sex,
     height,
     weight,
     fightingStyle,
-    wins,
-    loss,
-    totalWins,
-    totalLosses,
+    wins: [],
+    loss: [],
+    totalWins: 0,
+    totalLosses: 0,
   })
     .then((data) => {
       // console.log('DATA', data);
+      res.locals.user = data;
       return next();
     })
     .catch((err) => {
       return next({
-        log: 'Error in controller.createProfile middleware',
+        log: `Error in controller.createProfile middleware: ${err}`,
         message: {
           err: 'There was an error when creating your profile',
           status: 500,
@@ -114,6 +110,10 @@ Controller.createUser = (req, res, next) => {
       });
     });
 };
+
+Controller.addProfilePicture = (req, res, next) => {
+  console.log(req.file)
+}
 
 Controller.verifyUser = (req, res, next) => {
   console.log('TESTING');
