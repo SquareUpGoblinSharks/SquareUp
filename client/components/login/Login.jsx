@@ -34,7 +34,7 @@ const Login = () => {
       console.log('TESTING', userInfo);
       dispatch(login(userInfo));
 
-      // If user info successfully fetched, fetch all users info (to use on the HomePage), and then navigate to '/';
+      // If user info successfully fetched, fetch all users info (to use on the HomePage), and then navigate to '/home';
       if (userResponse.ok) {
         const allUsersResponse = await fetch('http://localhost:8000/HomePage');
         const allUsersInfo = await allUsersResponse.json();
