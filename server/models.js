@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-
-mongoose.set('useFindAndModify', false);
+const bcrypt = require('bcryptjs');
 
 const MONGO_URI =
   'mongodb+srv://bnlee419:brian0419@cluster0.tqcvw05.mongodb.net/?retryWrites=true&w=majority';
@@ -28,13 +27,16 @@ const profileSchema = new Schema({
     unique: true,
     required: true,
   },
+  age: {
+    type: Number,
+    required: true,
+  },
   password: {
     type: String,
     required: true,
   },
   profilePicture: {
     type: String,
-    required: true,
   },
   sex: {
     type: String,
@@ -52,18 +54,36 @@ const profileSchema = new Schema({
     type: String,
     required: true,
   },
+  wins: [{ type: String }],
+  loss: [{ type: String }],
   totalWins: {
     type: Number,
-    required: true,
+    default: 0,
   },
   totalLosses: {
     type: Number,
-    required: true,
+    default: 0,
   },
+});
+
+const SALT_WORK_FACTOR = 5;
+
+profileSchema.pre('save', async function (next) {
+  try {
+    if (this.isModified('password')) {
+      // Hash the password using bcrypt
+      const hashedPassword = await bcrypt.hash(this.password, SALT_WORK_FACTOR);
+
+      // Set the hashed password as the user's password
+      this.password = hashedPassword;
+      console.log('PASSWORD', this.password);
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 
 const Profiles = mongoose.model('profile', profileSchema);
 
-module.exports = {
-  Profiles,
-};
+module.exports = Profiles;
