@@ -13,7 +13,7 @@ Controller.getProfile = (req, res, next) => {
     .exec()
     .then((data) => {
       res.locals.profiles = data;
-      console.log('FINDING USER DATA:', data);
+      // console.log('FINDING USER DATA:', data);
       return next();
     })
     .catch((err) => {
@@ -116,7 +116,7 @@ Controller.addProfilePicture = (req, res, next) => {
 }
 
 Controller.verifyUser = (req, res, next) => {
-  console.log('TESTING');
+  // console.log('TESTING');
   const { username, password } = req.body;
   Profiles.findOne({ username: username, password: password })
     .then((user) => {

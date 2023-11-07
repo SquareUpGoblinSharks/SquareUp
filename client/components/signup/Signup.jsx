@@ -69,6 +69,7 @@ const Signup = () => {
   };
 
   return (
+    <div class='signup'>
     <div className="sign-container">
       <form className="signForm" onSubmit={onSignupHandler}>
         <div className="form-group">
@@ -169,6 +170,7 @@ const Signup = () => {
         </div>
         <input type="submit" value="Create User" className="submit-btn" />
       </form>
+    </div>
     </div>
   );
 };

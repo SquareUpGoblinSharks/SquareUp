@@ -7,7 +7,7 @@ const UpcomingMatches = () => {
     <>
     <div className='upcomingMatches'>
       <h2>UPCOMING MATCHES</h2>
-      <div id="upcomingMatchesContainer">
+
         <table>
           <thead>
             <tr>
@@ -18,9 +18,7 @@ const UpcomingMatches = () => {
 
           <tbody id="leaderBoardBody">
           </tbody>
-
         </table>
-      </div>
     </div>
     </>
   );
