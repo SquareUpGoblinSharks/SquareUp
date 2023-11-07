@@ -116,6 +116,22 @@ tbody td:hover::before {
   width: 90%;
   background-color: beige;
   border-radius: 15px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 10px;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 3px;
+  }
+
 }
 
 .buttonBar {
@@ -391,6 +407,5 @@ body {
     0px 1px 1px rgba(81, 41, 10, 0.15);
   transform: translateY(0.125rem);
   }
-
 
 }

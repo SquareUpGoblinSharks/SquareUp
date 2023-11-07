@@ -41,6 +41,7 @@ const Profile = () => {
     <div className="profileContainer">
       <div className="profilePicture"></div>
       {lastUser && (
+        // <div class='stat-style'>
         <div className="stats">
           <li>Username: {lastUser.username}</li>
           <li>Age: {lastUser.age}</li>
@@ -51,6 +52,7 @@ const Profile = () => {
           <li>Wins: {lastUser.totalWins}</li>
           <li>Losses: {lastUser.totalLosses}</li>
         </div>
+        // </div>
       )}
       <ButtonBar passHandleClick={passHandleClick} />
     </div>
