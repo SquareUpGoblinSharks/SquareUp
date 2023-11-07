@@ -4,6 +4,19 @@ const mongoose = require('mongoose');
 const Controller = require('./controllers');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const multer = require('multer');
+
+// Profile picture storage configuration
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './public');
+  },
+  filename: (req, file, cb) => {
+    // console.log(file);
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+const upload = multer({ storage: storage });
 
 //checking
 const PORT = 8000;
@@ -20,6 +33,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/client', express.static(path.resolve(__dirname, '../client')));
+
+/** Profile picture upload endpoints */
+// app.post(
+//   '/profile_picture',
+//   upload.single('profilePicture'),
+//   Controller.addProfilePicture,
+//   (req, res) => {
+//     console.log(req.file, req.body);
+//     res.status(200).json(req.file);
+//   }
+// );
+// app.get('/profile_picture', (req, res) => {
+//   res.status(200).sendFile(path.join(__dirname, '../public/1699313229211.png'));
+// });
 
 //on render for the root get all profiles, right now set to 30 random profiles
 //Test is the homepage
@@ -47,8 +74,7 @@ app.get('/signup', (req, res) => {
 // this is for after you enter your information
 // creates user and then redirects them to the homepage
 app.post('/signup', Controller.createUser, (req, res) => {
-  res.status(200);
-  res.redirect('/index.html');
+  res.status(200).json(res.locals.user);
 });
 
 // login

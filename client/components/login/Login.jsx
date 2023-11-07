@@ -41,7 +41,7 @@ const Login = () => {
         console.log('TESTING', allUsersInfo);
         dispatch(getUsers(allUsersInfo));
         if (allUsersResponse.ok) {
-          navigate('/');
+          navigate('/home');
         }
       }
     } catch (error) {

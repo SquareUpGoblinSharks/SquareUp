@@ -1,10 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { login } from '../../state/userSlice';
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const onSignupHandler = async (event) => {
+    event.preventDefault();
+    const userObj = {
+      username: event.target.elements.username.value,
+      password: event.target.elements.password.value,
+      name: event.target.elements.name.value,
+      age: event.target.elements.age.value,
+      sex: event.target.elements.sex.value,
+      height: event.target.elements.height.value,
+      weight: event.target.elements.weight.value,
+      fightingStyle: event.target.elements.fightingStyle.value,
+      location: event.target.elements.location.value,
+      profilePicture: '',
+    };
+    console.log(event.target.elements.profilePicture.files[0]);
+    const profilePicture = event.target.elements.profilePicture.files[0];
+    console.log(profilePicture);
+    const formData = new FormData();
+    formData.append('profilePicture', profilePicture);
+    try {
+      const createUserResponse = await fetch('http://localhost:8000/signup', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userObj),
+      });
+      const createUserData = await createUserResponse.json();
+
+      dispatch(login(createUserData));
+      navigate('/home')
+
+      // // Stores the image
+      // fetch('http://localhost:8000/profile_picture', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-type': 'multipart/form-data',
+      //   },
+      //   body: formData,
+      // });
+
+      // // Retrieves the stored image
+      // const getImageResponse = await axios.get(
+      //   'http://localhost:8000/profile_picture',
+      //   {
+      //     responseType: 'arraybuffer',
+      //   }
+      // );
+      // let blob = new Blob([getImageResponse.data], {
+      //   type: getImageResponse.headers['content-type'],
+      // });
+      // let image = URL.createObjectURL(blob);
+      // console.log('image', image);
+
+
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
   return (
     <div class='signup'>
     <div className="sign-container">
-      <form method="POST" action="/signup" className="signForm">
+      <form className="signForm" onSubmit={onSignupHandler}>
         <div className="form-group">
           <label htmlFor="username" className="form-label">
             Username:
@@ -26,6 +93,18 @@ const Signup = () => {
             type="password"
             className="form-input"
           />
+        </div>
+        <div className="form-group">
+          <label htmlFor="name" className="form-label">
+            Name:
+          </label>
+          <input id="name" name="name" className="form-input" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="sex" className="form-label">
+            Sex:
+          </label>
+          <input id="sex" name="sex" className="form-input" />
         </div>
         <div className="form-group">
           <label htmlFor="age" className="form-label">
@@ -74,6 +153,18 @@ const Signup = () => {
             id="location"
             name="location"
             type="text"
+            className="form-input"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="profilePicture" className="form-label">
+            Profile Picture:
+          </label>
+          <input
+            id="profilePicture"
+            name="profilePicture"
+            type="file"
+            accept="image/gif, image/jpeg, image/png"
             className="form-input"
           />
         </div>
