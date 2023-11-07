@@ -48,7 +48,6 @@ app.get('/signup', (req, res) => {
 // creates user and then redirects them to the homepage
 app.post('/signup', Controller.createUser, (req, res) => {
   res.status(200);
-  res.redirect('/index.html');
 });
 
 // login
