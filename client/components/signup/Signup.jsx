@@ -38,7 +38,7 @@ const Signup = () => {
       const createUserData = await createUserResponse.json();
 
       dispatch(login(createUserData));
-      navigate('/')
+      navigate('/home')
 
       // // Stores the image
       // fetch('http://localhost:8000/profile_picture', {
