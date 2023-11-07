@@ -1,12 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const UpcomingMatches = () => {
 
-  
+
+
   return (
     <>
-    <div className='upcomingMatches'>
-      <h2>UPCOMING MATCHES</h2>
+      <div className="upcomingMatches">
+        <h2>UPCOMING MATCHES</h2>
 
         <table>
           <thead>
@@ -16,10 +18,9 @@ const UpcomingMatches = () => {
             </tr>
           </thead>
 
-          <tbody id="leaderBoardBody">
-          </tbody>
+          <tbody id="leaderBoardBody"></tbody>
         </table>
-    </div>
+      </div>
     </>
   );
 };
