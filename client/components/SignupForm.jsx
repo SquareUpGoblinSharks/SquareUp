@@ -11,15 +11,10 @@ const SignupForm = ({onSignupHandler}) => {
   const {register, handleSubmit } = useForm();
   const onSubmit = data => {
     console.log('hello from onSubmit')
-    console.log(data)
+    onSignupHandler(data);
   }
 
-//scratch
-const SignupHandler = async(data) => {
-  const {profilePicture, ...body} = data;
-  const resp = await client.post('/signup', body);
-  
-};
+
 
 
 

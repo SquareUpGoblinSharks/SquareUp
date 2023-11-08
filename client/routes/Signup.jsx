@@ -19,56 +19,25 @@ const Signup = () => {
 
   const SignupHandler = async(data) => {
     const {profilePicture, ...body} = data;
-    const resp = await client.post('/signup', body);
-    if (resp.status === 200) {
-      dispatch(login(resp.data));
-      const allUsersResponse = await client.get('/HomePage');
-      if (allUsersResponse.status === 200) {
-        dispatch(getUsers(allUsersResponse.data));
-        navigate('/home');
+    console.log('data', data)
+    try{
+      const resp = await client.post('/signup', body);
+      if (resp.status === 200) {
+        dispatch(login(resp.data));
+        const allUsersResponse = await client.get('/HomePage');
+        if (allUsersResponse.status === 200) {
+          dispatch(getUsers(allUsersResponse.data));
+          navigate('/home');
+        }
+      } else {
+        throw new Error(`Signup Handler Status: ${resp.status}`)
+        //navigate(0)
       }
-    } else {
-      navigate(0)
+    } catch(err) {
+      console.error(err);
     }
+    
   };
-  const onSignupHandler = async (event) => {
-    event.preventDefault();
-    const userObj = {
-      username: event.target.elements.username.value,
-      password: event.target.elements.password.value,
-      name: event.target.elements.name.value,
-      age: event.target.elements.age.value,
-      sex: event.target.elements.sex.value,
-      height: event.target.elements.height.value,
-      weight: event.target.elements.weight.value,
-      fightingStyle: event.target.elements.fightingStyle.value,
-      location: event.target.elements.location.value,
-      profilePicture: '',
-    };
-
-    const profilePicture = event.target.elements.profilePicture.files[0];
-
-    const formData = new FormData();
-    formData.append('profilePicture', profilePicture);
-
-    try {
-      const createUserResponse = await fetch('http://localhost:8000/signup', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userObj),
-      });
-
-      const createUserData = await createUserResponse.json();
-      dispatch(login(createUserData));
-
-      const allUsersResponse = await fetch('http://localhost:8000/HomePage');
-      const allUsersInfo = await allUsersResponse.json();
-      console.log('TESTING', allUsersInfo);
-      dispatch(getUsers(allUsersInfo));
-      navigate('/home');
 
       /** THE ISSUE WITH PROFILE PICTURES IS THAT WE WERE ABLE TO UPLOAD AND STORE THE IMAGES LOCALLY,
        *  AND WE WANTED TO STORE THE IMAGE PATH IN THE DATABASE,
@@ -98,121 +67,16 @@ const Signup = () => {
       // });
       // let image = URL.createObjectURL(blob);
       // console.log('image', image);
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
+    
+
 
   return (
     <HexGreenBGWrapper>
       <CenteredWrapper>
         <div class="signup">
-          <div className="sign-container">
-            <SignupForm />
-            {/* <form className="signForm" onSubmit={onSignupHandler}>
-              <div className="form-group">
-                <label htmlFor="username" className="form-label">
-                  Username:
-                </label>
-                <input
-                  id="username"
-                  name="username"
-                  type="text"
-                  className="form-input"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password" className="form-label">
-                  Password:
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  className="form-input"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="name" className="form-label">
-                  Name:
-                </label>
-                <input id="name" name="name" className="form-input" />
-              </div>
-              <div className="form-group">
-                <label htmlFor="sex" className="form-label">
-                  Sex:
-                </label>
-                <input id="sex" name="sex" className="form-input" />
-              </div>
-              <div className="form-group">
-                <label htmlFor="age" className="form-label">
-                  Age:
-                </label>
-                <input
-                  id="age"
-                  name="age"
-                  type="number"
-                  className="form-input"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="height" className="form-label">
-                  Height:
-                </label>
-                <input
-                  id="height"
-                  name="height"
-                  type="number"
-                  className="form-input"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="weight" className="form-label">
-                  Weight:
-                </label>
-                <input
-                  id="weight"
-                  name="weight"
-                  type="number"
-                  className="form-input"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="fightingStyle" className="form-label">
-                  Fighting Style:
-                </label>
-                <input
-                  id="fightingStyle"
-                  name="fighting style"
-                  type="text"
-                  className="form-input"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="location" className="form-label">
-                  Location:
-                </label>
-                <input
-                  id="location"
-                  name="location"
-                  type="text"
-                  className="form-input"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="profilePicture" className="form-label">
-                  Profile Picture:
-                </label>
-                <input
-                  id="profilePicture"
-                  name="profilePicture"
-                  type="file"
-                  accept="image/gif, image/jpeg, image/png"
-                  className="form-input"
-                />
-              </div>
-              <input type="submit" value="Create User" className="submit-btn" />
-            </form> */}
+          {/*sign-container */}
+          <div className="flex justify-center items-center">
+            <SignupForm onSignupHandler={SignupHandler}/>
           </div>
         </div>
       </CenteredWrapper>
