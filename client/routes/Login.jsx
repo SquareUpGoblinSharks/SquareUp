@@ -5,7 +5,7 @@ import { getUsers, login } from '../state/userSlice.js';
 import { useForm } from 'react-hook-form';
 
 import Button from '../components/Button.jsx';
-import HexGreenBGWrapper from '../components/HexGreenBGWrapper.jsx';
+import BackgroundWrapper from '../components/HexGreenBGWrapper.jsx';
 import CenteredWrapper from '../components/CenteredWrapper.jsx';
 
 import client from '../lib/client.js';
@@ -40,10 +40,10 @@ const Login = () => {
   };
 
   return (
-    <HexGreenBGWrapper>
-      <CenteredWrapper>
+    <BackgroundWrapper>
+      <CenteredWrapper additionalClasses={'dark-slate-green'}>
       <h1 
-        className='rounded-lg bg-white'
+        className='mb-4 text-4xl font-extrabold leading-none tracking-tight text-black md:text-5xl lg:text-6x'
       >Square Up!</h1>
       <Form
         onSubmit={onSubmit}
@@ -74,7 +74,7 @@ const Login = () => {
         value={'Create Account'}
       />
       </CenteredWrapper>
-    </HexGreenBGWrapper>
+    </BackgroundWrapper>
     
   );
 };

@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const Controller = require('./controllers/controllers');
+const cookieController = require('./controllers/cookieController');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const multer = require('multer'); // for uploading images?
@@ -71,7 +72,7 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
       });
       
       // login
-      app.post('/login', Controller.verifyUser, (req, res) => {
+      app.post('/login', Controller.verifyUser, cookieController.setSSIDCookie, (req, res) => {
         console.log('info', res.locals.userInfo);
         res.status(200).json(res.locals.userInfo);
       });
@@ -85,6 +86,7 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
       })
 
       app.get('/logout', (req, res) => {
+        document.cookie = "name='ssid' expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         res.sendFile(path.resolve(__dirname, '../client/index.html'));
         // res.sendFile(path.resolve(__dirname, '../client/routes/Login.jsx'));
       })

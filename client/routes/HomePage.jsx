@@ -16,22 +16,22 @@ const HomePage = () => {
   return (
     <HexGreenBGWrapper>
       <CenteredWrapper>
-      <div className="mainContainer">
-      <div className="leftContainer">
-        <Leaderboard />
-      </div>
-      <div className="middleContainer">
-        <Profile />
-        {/* <ButtonBar /> */}
-      </div>
-      <div className="rightContainer">
-        <LogoutAndEdit />
-        <UpcomingMatches />
-      </div>
-    </div>
+        <div className="mainContainer">
+          <div className="leftContainer">
+            <Leaderboard />
+          </div>
+          <div className="middleContainer">
+            <Profile />
+            {/* <ButtonBar /> */}
+          </div>
+          <div className="rightContainer">
+            <LogoutAndEdit />
+            <UpcomingMatches />
+          </div>
+        </div>
       </CenteredWrapper>
     </HexGreenBGWrapper>
-   
+
   );
 };
 

@@ -11,13 +11,17 @@ module.exports = {
       },
       colors: {
         'squareup-teal': '#142e35',
-        
+        // color scheme:
+        'kelly-green' : '#2BC016',
+        'jade': '#26A96C',
+        'sea-green' : '#32936F',
+        'myrtle-green' : '#387D7A',
+        'dark-slate-green' : '#395E66',
       }
-    },
-   
+    }
   },
-  plugins: [ "postcss-preset-env", 
-  
-],
+  plugins: ["postcss-preset-env",
+
+  ],
 }
 
