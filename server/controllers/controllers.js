@@ -116,28 +116,28 @@ Controller.addProfilePicture = (req, res, next) => {
   console.log(req.file)
 }
 
-Controller.verifyUser = (req, res, next) => {
+Controller.verifyUser = async (req, res, next) => {
   // console.log('TESTING');
   const { username, password } = req.body;
-  Profiles.findOne({ username: username, password: password })
-    .then((user) => {
-      if (!user) {
-        res.status(401);
-        // return res.redirect('/signup');
-      }
-      // bcrypt.compare(password, user.password, (err, isMatch) => {
-      //   console.log('password', password);
-      //   if (err) {
-      //     console.log('Error verifying user', err);
-      //     return next(err);
-      //   }
-      res.locals.userInfo = user;
-        return next();
-      })
-    .catch((err) => {
+  console.log(req.body);
+  try{
+    const search = await Profiles.findOne({ username: username, password: password });
+    if(search){
+      res.locals.userInfo = search;
+      console.log('user verified');
+      return next();
+    }
+    else {
+      console.log('verification failed')
+      return next();
+    }
+  }
+    catch(err) {
       console.log('Error verifying user', err);
       next(err);
-    });
+    };
+
+
 };
 
 module.exports = Controller;

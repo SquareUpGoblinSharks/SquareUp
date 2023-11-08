@@ -20,7 +20,7 @@ const Schema = mongoose.Schema;
 const profileSchema = new Schema({
   name: {
     type: String,
-    required: true,
+    required: false,
   },
   username: {
     type: String,
@@ -29,7 +29,7 @@ const profileSchema = new Schema({
   },
   age: {
     type: Number,
-    required: true,
+    required: false,
   },
   password: {
     type: String,
@@ -40,19 +40,19 @@ const profileSchema = new Schema({
   },
   sex: {
     type: String,
-    required: true,
+    required: false,
   },
   height: {
     type: Number,
-    required: true,
+    required: false,
   },
   weight: {
     type: Number,
-    required: true,
+    required: false,
   },
   fightingStyle: {
     type: String,
-    required: true,
+    required: false,
   },
   wins: [{ type: String }],
   loss: [{ type: String }],

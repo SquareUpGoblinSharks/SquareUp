@@ -30,8 +30,8 @@ const Login = () => {
           navigate('/home')
         }
       }
-    } catch(err){
-      console.log(err);
+    } catch (error) {
+      console.error(error);
     }
   }
 
