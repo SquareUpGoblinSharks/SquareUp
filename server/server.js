@@ -72,7 +72,7 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
       
       // login
       app.post('/login', Controller.verifyUser, (req, res) => {
-        console.log('info', res.locals.userInfo)
+        console.log('info', res.locals.userInfo);
         res.status(200).json(res.locals.userInfo);
       });
       
@@ -80,6 +80,9 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
         // console.log('testing get route');
         res.status(200).json(res.locals.profiles);
       });
+      app.get('/secret', (req, res) => {
+        res.redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+      })
       // error handling
       app.use((req, res) => {
         res.status(404).send('Not Found');
