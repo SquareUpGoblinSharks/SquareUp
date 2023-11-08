@@ -40,21 +40,12 @@ const Login = () => {
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input {...register('username')} placeholder="username" />
-        <input
-          {...register('password')}
-          type="password"
-          placeholder="password"
-        />
-        <input className="button" type="submit" value="login" />
-        <button
-          className="button"
-          type="button"
-          onClick={() => {
-            navigate('/signup');
-          }}
-        >
-          Create Account
-        </button>
+        <input {...register('password')} type="password" placeholder="password" />
+        <input  className='button' type="submit" value="login" />
+        <button className='button' type='button' onClick={
+          () => {navigate('/signup')}
+        }>Create Account</button>
+        {/*move create account button outside of form*/}
       </form>
     </div>
   );
