@@ -145,6 +145,8 @@ Controller.verifyUser = async (req, res, next) => {
         });
       } else {
         res.locals.userInfo = user; 
+        res.locals._id = user._id;
+        console.log(user._id);
         return next();
       }
     }
@@ -159,6 +161,7 @@ Controller.verifyUser = async (req, res, next) => {
 
 Controller.updateUser = async (req, res, next) => {
   const {
+    username,
     name,
     sex,
     height,
@@ -167,7 +170,7 @@ Controller.updateUser = async (req, res, next) => {
     fightingStyle,
   } = req.body;
   try{
-    const search = await Profiles.findOne(user);
+    const search = await Profiles.findOne({username: username});
     if(search){
       search.name = name;
       search.sex = sex;
