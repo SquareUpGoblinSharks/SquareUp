@@ -4,31 +4,25 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import Button from './Button';
 
-const Form = ({onSubmit, inputDetails}) => {
+const Form = ({additionalClasses, onSubmit, inputDetails, children}) => {
   const { register, handleSubmit } = useForm();
 
-  // generate form elements
-  inputDetails.map(detailsObj => {
-
-    console.log(detailsObj);
-  })
-
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center'>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={`flex flex-col items-center ${additionalClasses}`}
+    >
       {inputDetails.map( (detailsObj, index) => {
-        return <FormInput
-          key={index}
-          {...register(detailsObj.name, detailsObj.rules)}
-          {...detailsObj}
-        />
+        return (
+          <FormInput
+            key={index}
+            {...register(detailsObj.name, detailsObj.rules)}
+            {...detailsObj}
+          />
+        )
       })}
-        <Button
-          type={'submit'}
-          value={'login'}
-          primary={true}
-          additionalClasses={'border-slate-300'}
-        />
+
+      {children}
     </form>
   )
 }

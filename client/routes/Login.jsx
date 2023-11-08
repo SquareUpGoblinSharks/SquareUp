@@ -41,7 +41,9 @@ const Login = () => {
   return (
     <HexGreenBGWrapper>
       <CenteredWrapper>
-      <h3>Square Up!</h3>
+      <h1 
+        className='rounded-lg bg-white'
+      >Square Up!</h1>
       <Form
         onSubmit={onSubmit}
         inputDetails={[
@@ -65,18 +67,6 @@ const Login = () => {
         />
       </Form>
 
-
-
-      {/* <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center'>
-        <input {...register('username', {required: true})} placeholder="username" />
-        <input {...register('password', {required: true})} type="password" placeholder="password" />
-        <Button
-          type={'submit'}
-          value={'login'}
-          primary={true}
-          additionalClasses={'border-slate-300'}
-        />
-      </form> */}
       <Button
         onClickFunc={() => { navigate('/signup') }}
         primary={false}
