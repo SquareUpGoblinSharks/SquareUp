@@ -50,7 +50,8 @@ const Login = () => {
         <input  className='button' type="submit" value="login" />
         <button className='button' type='button' onClick={
           () => {navigate('/signup')}
-        }>Create Account</button> 
+        }>Create Account</button>
+        {/*move create account button outside of form*/}
       </form>
     </div>
       </CenteredWrapper>
