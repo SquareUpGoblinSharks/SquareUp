@@ -4,6 +4,10 @@ import { useDispatch } from 'react-redux';
 import { getUsers, login } from '../state/userSlice.js';
 import { useForm } from 'react-hook-form';
 
+
+import HexGreenBGWrapper from '../components/HexGreenBGWrapper.jsx';
+import CenteredWrapper from '../components/CenteredWrapper.jsx';
+
 import client from '../lib/client.js';
 
 const Login = () => {
@@ -37,7 +41,9 @@ const Login = () => {
   }
 
   return (
-    <div className='login'>
+    <HexGreenBGWrapper>
+      <CenteredWrapper>
+      <div className='login'>
       <div className='logo'><a>Square UP!</a></div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input {...register('username')} placeholder="username" />
@@ -45,9 +51,13 @@ const Login = () => {
         <input  className='button' type="submit" value="login" />
         <button className='button' type='button' onClick={
           () => {navigate('/signup')}
-        }>Create Account</button> 
+        }>Create Account</button>
+        {/*move create account button outside of form*/}
       </form>
     </div>
+      </CenteredWrapper>
+    </HexGreenBGWrapper>
+    
   );
 };
 

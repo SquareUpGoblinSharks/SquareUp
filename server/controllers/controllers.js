@@ -69,7 +69,7 @@ Controller.updateWinsLosses = (req, res, next) => {
 };
 
 Controller.createUser = (req, res, next) => {
-  // console.log('REQUESTBODY', req.body);
+  // console.log('REQUESTBODY❤️❤️❤️❤️❤️', req.body);
   const {
     name,
     username,
@@ -117,27 +117,44 @@ Controller.addProfilePicture = (req, res, next) => {
 }
 
 Controller.verifyUser = async (req, res, next) => {
-  // console.log('TESTING');
   const { username, password } = req.body;
-  console.log(req.body);
-  try{
-    const search = await Profiles.findOne({ username: username, password: password });
-    if(search){
-      res.locals.userInfo = search;
-      console.log('user verified');
-      return next();
-    }
-    else {
-      console.log('verification failed')
-      return next();
-    }
+  if (!username || !password) {
+    return next({
+      log: "Missing username or password in controller.verifyUser",
+      status: 400,
+      message: { error: "Username and/or password cannot be empty" },
+    });
   }
-    catch(err) {
-      console.log('Error verifying user', err);
-      next(err);
-    };
+  try {
+    const user = await Profiles.findOne({ username });
 
-
+    if (!user) {
+      return next({
+        log: "User does not exist in controller.verifyUser",
+        status: 400,
+        message: { error: "Username and/or password are incorrect" },
+      });
+    } else {
+      
+      const result = await bcrypt.compare(password, user.password);
+      if (!result) {
+        return next({
+          log: "Password does not match controller.verifyUser",
+          status: 400,
+          message: { error: "Username and/or password are incorrect" },
+        });
+      } else {
+        res.locals.userInfo = user; 
+        return next();
+      }
+    }
+  } catch (err) {
+    return next({
+      log: `An error occurred in controller.verifyUser: ${err}`,
+      status: 500,
+      message: { err: `An error occurred` },
+    });
+  }
 };
 
 Controller.updateUser = async (req, res, next) => {
