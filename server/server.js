@@ -4,19 +4,19 @@ const mongoose = require('mongoose');
 const Controller = require('./controllers/controllers');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const multer = require('multer');
+const multer = require('multer'); // for uploading images?
 
 // Profile picture storage configuration
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, './public');
-  },
-  filename: (req, file, cb) => {
-    // console.log(file);
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-const upload = multer({ storage: storage });
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, './public');
+//   },
+//   filename: (req, file, cb) => {
+//     // console.log(file);
+//     cb(null, Date.now() + path.extname(file.originalname));
+//   },
+// });
+// const upload = multer({ storage: storage });
 
 //checking
 const PORT = 8000;
