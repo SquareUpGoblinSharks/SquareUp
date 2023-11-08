@@ -76,12 +76,21 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
         res.status(200).json(res.locals.userInfo);
       });
       
-      app.get('/HomePage', Controller.getProfile, (req, res) => {
+      app.get('/Leaderboard', Controller.getProfile, (req, res) => {
         // console.log('testing get route');
         res.status(200).json(res.locals.profiles);
       });
       app.get('/secret', (req, res) => {
         res.redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+      })
+
+      app.get('/logout', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../client/index.html'));
+        // res.sendFile(path.resolve(__dirname, '../client/routes/Login.jsx'));
+      })
+      app.patch('/editProfile', Controller.updateUser, (req, res) => {
+        console.log('update request completed');
+        res.status(200).json();
       })
       // error handling
       app.use((req, res) => {
