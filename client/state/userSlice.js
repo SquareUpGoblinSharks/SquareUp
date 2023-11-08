@@ -1,13 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import client from '../lib/client.js';
 
-// const response = await client.post('/login', data, {})
-//       if (response.status === 200) {
-//         dispatch(login(response.data));
-//         const allUsersResponse = await client.get('/HomePage');
-//         if (allUsersResponse.status === 200) {
-//           dispatch(getUsers(allUsersResponse.data));
-//           navigate('/home')
 
 export const loginUser = createAsyncThunk(
   'user/loginAsync',
