@@ -67,7 +67,7 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
       
       // this is for after you enter your information
       // creates user and then redirects them to the homepage
-      app.post('/signup', Controller.createUser, (req, res) => {
+      app.post('/signup', Controller.createUser, Controller.verifyUser, cookieController.setSSIDCookie, (req, res) => {
         res.status(200).json(res.locals.user);
       });
       
@@ -86,7 +86,7 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
       })
 
       app.get('/logout', (req, res) => {
-        document.cookie = "name='ssid' expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         res.sendFile(path.resolve(__dirname, '../client/index.html'));
         // res.sendFile(path.resolve(__dirname, '../client/routes/Login.jsx'));
       })
