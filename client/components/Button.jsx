@@ -7,7 +7,7 @@ const Button = ({value, onClickFunc, primary, type, additionalClasses}) => {
   if (primary === undefined) primary = false;
   return (
     <button
-      className={`${primary ? 'bg-blue-600 hover:bg-blue-400' : 'bg-blue-300 hover:bg-blue-100'} text-white font-bold py-2 px-4 mr-2 rounded ${additionalClasses}`}
+      className={`${primary ? 'bg-jade hover:bg-kelly-green': 'bg-myrtle-green hover:bg-sea-green'} text-white font-bold py-2 px-4 m-2 rounded ${additionalClasses}`}
       onClick={onClickFunc}
       type={type ? type : 'button'}
     >{value}
