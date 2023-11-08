@@ -1,9 +1,9 @@
 import React from 'react';
-import Profile from './Profile.jsx';
-import Leaderboard from './Leaderboard.jsx';
-import UpcomingMatches from './UpcomingMatches';
-import ButtonBar from './ButtonBar.jsx';
-import LogoutAndEdit from './LogoutAndEdit.jsx'
+import Profile from '../components/Profile.jsx';
+import Leaderboard from '../components/Leaderboard.jsx';
+import UpcomingMatches from '../components/UpcomingMatches';
+import ButtonBar from '../components/ButtonBar.jsx';
+import LogoutAndEdit from '../components/LogoutAndEdit.jsx'
 
 // useEffect(() => {
 

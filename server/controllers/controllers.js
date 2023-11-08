@@ -1,4 +1,4 @@
-const Profiles = require('./models');
+const Profiles = require('../models/models');
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 
@@ -77,6 +77,7 @@ Controller.createUser = (req, res, next) => {
     password,
     sex,
     height,
+    age,
     weight,
     fightingStyle,
   } = req.body;
@@ -89,6 +90,7 @@ Controller.createUser = (req, res, next) => {
     sex,
     height,
     weight,
+    age,
     fightingStyle,
     wins: [],
     loss: [],

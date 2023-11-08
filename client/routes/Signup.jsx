@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { login, getUsers } from '../../state/userSlice';
+import { login, getUsers } from '../state/userSlice';
 
 const Signup = () => {
   const navigate = useNavigate();

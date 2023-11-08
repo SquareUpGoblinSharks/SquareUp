@@ -1,7 +1,7 @@
 import React from 'react';
 import { redirect, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getUsers, login } from '../../state/userSlice';
+import { getUsers, login } from '../state/userSlice.js';
 
 const Login = () => {
   const dispatch = useDispatch();

@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 .mainContainer {
   display: flex;
   justify-content: center;
@@ -12,7 +17,7 @@
   .leaderboard {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     height: 630px;
     width: 310px;
@@ -57,7 +62,7 @@ th {
 }
 
 thead th {
-  // background-color: #1b2241;
+  
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   background-color: rgba(0, 0, 0, 0);
 }
@@ -88,7 +93,7 @@ tbody td:hover::before {
 .middleContainer {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   height: 780px;
   width: 55%;
@@ -178,7 +183,6 @@ tbody td:hover::before {
 #pass:hover,
 #maybe:hover,
 #squareUp:hover {
-  // box-shadow: rgba(253, 76, 0, 0.5) 0 8px 8px;
   box-shadow: rgba(205, 101, 21, 0.46) 0 0 0 4px,
     -6px 8px 10px rgba(81, 41, 10, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
 }
@@ -186,7 +190,6 @@ tbody td:hover::before {
 #pass:active,
 #maybe:active,
 #squareUp:active {
-  // transform: scale(1.15);
   background-color: #f3f4f6;
   box-shadow: -1px 2px 5px rgba(81, 41, 10, 0.15),
     0px 1px 1px rgba(81, 41, 10, 0.15);
@@ -213,7 +216,7 @@ tbody td:hover::before {
   .upcomingMatches {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     height: 480px;
     width: 310px;
@@ -277,13 +280,11 @@ body {
   }
 
   .button-85:hover {
-    // box-shadow: rgba(253, 76, 0, 0.5) 0 8px 8px;
     box-shadow: rgba(205, 101, 21, 0.46) 0 0 0 4px,
       -6px 8px 10px rgba(81, 41, 10, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
   }
 
   .button-85:active {
-    // transform: scale(1.15);
     background-color: #f3f4f6;
     box-shadow: -1px 2px 5px rgba(81, 41, 10, 0.15),
       0px 1px 1px rgba(81, 41, 10, 0.15);
@@ -396,13 +397,11 @@ body {
   }
 
   .button:hover {
-    // box-shadow: rgba(253, 76, 0, 0.5) 0 8px 8px;
     box-shadow: rgba(205, 101, 21, 0.46) 0 0 0 4px,
       -6px 8px 10px rgba(81, 41, 10, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
   }
 
   .button:active {
-    // transform: scale(1.15);
     background-color: #f3f4f6;
     box-shadow: -1px 2px 5px rgba(81, 41, 10, 0.15),
       0px 1px 1px rgba(81, 41, 10, 0.15);
@@ -460,13 +459,11 @@ body {
   }
 
   .submit-btn:hover {
-    // box-shadow: rgba(253, 76, 0, 0.5) 0 8px 8px;
     box-shadow: rgba(205, 101, 21, 0.46) 0 0 0 4px,
       -6px 8px 10px rgba(81, 41, 10, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
   }
 
   .submit-btn:active {
-    // transform: scale(1.15);
     background-color: #f3f4f6;
     box-shadow: -1px 2px 5px rgba(81, 41, 10, 0.15),
       0px 1px 1px rgba(81, 41, 10, 0.15);
