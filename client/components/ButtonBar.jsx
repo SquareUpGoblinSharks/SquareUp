@@ -1,5 +1,6 @@
 import React from 'react';
 import Profile from './Profile.jsx';
+import Button from './Button.jsx';
 
 const ButtonBar = ({ passHandleClick }) => {
   return (
@@ -9,6 +10,7 @@ const ButtonBar = ({ passHandleClick }) => {
       </button>
       <button id="maybe">MAYBE</button>
       <button id="squareUp">SQUARE UP</button>
+      <Button/>
     </div>
   );
 };
