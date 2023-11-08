@@ -2,9 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const UpcomingMatches = () => {
-
-
-
   return (
     <>
       <div className="upcomingMatches">
