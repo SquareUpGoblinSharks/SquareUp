@@ -22,10 +22,10 @@ const EditProfile = () => {
     const {profilePicture, ...body} = data;
     console.log('data', data)
     try{
-      const resp = await client.post('/signup', body);
+      const resp = await client.patch('/editProfile', body);
       if (resp.status === 200) {
-        dispatch(login(resp.data));
-        const allUsersResponse = await client.get('/HomePage');
+        dispatch(login(body));
+        const allUsersResponse = await client.get('/Leaderboard');
         if (allUsersResponse.status === 200) {
           dispatch(getUsers(allUsersResponse.data));
           navigate('/home');

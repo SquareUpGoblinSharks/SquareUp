@@ -18,7 +18,7 @@ const Signup = () => {
 
 
   const SignupHandler = async(data) => {
-    const {profilePicture, ...body} = data;
+    const body = data;
     console.log('data', data)
     try{
       const resp = await client.post('/signup', body);
