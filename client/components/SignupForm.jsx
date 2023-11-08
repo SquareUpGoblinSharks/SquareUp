@@ -7,11 +7,11 @@ import Button from './Button';
 import client from '../lib/client';
 
 
-const SignupForm = ({onSignupHandler}) => {
+const SignupForm = ({onSubmitHandler}) => {
   const {register, handleSubmit } = useForm();
   const onSubmit = data => {
     console.log('hello from onSubmit')
-    onSignupHandler(data);
+    onSubmitHandler(data);
   }
 
 
@@ -19,52 +19,18 @@ const SignupForm = ({onSignupHandler}) => {
 
 
 return (
-  <form className={'flex flex-col'} onSubmit={handleSubmit(onSubmit)}> 
-    <div className={'flex justify-between text-orange-500'}>
+  <form className={'flex flex-col text-orange-500'} onSubmit={handleSubmit(onSubmit)}> 
+    <div className={'flex justify-between my-1'}>
       <label>Username:</label>
       <input {...register('username')} />
     </div>
-    <div className={'flex justify-between text-orange-500'}>
+    <div className={'flex justify-between my-1'}>
       <label>Password:</label>
-      <input {...register('password')} type='password'/>
+      <input className={"w-45"} {...register('password')} type='password'/>
     </div>
-    <div className={'flex justify-between text-orange-500'}>
+    <div className={'flex justify-between mt-1 mb-4'}>
       <label>Name:</label>
-      <input {...register('name')} />
-    </div>
-    <div className={'flex justify-between text-orange-500'}>
-      <label>Gender:</label>
-      <select {...register('sex')}> 
-        <option value='female'>Female</option>
-        <option value='male'>Male</option>
-        <option value='other'>Other</option>
-      </select>
-    </div>
-    <div className={'flex justify-between text-orange-500'}>
-      <label>Age:</label>
-      <input type='number' {...register('age', {min: 18, max: 99})} />
-    </div>
-    <div className={'flex justify-between text-orange-500'}>
-      <label>Height:</label>
-      <input type='number' {...register('height')} />
-    </div>
-    <div className={'flex justify-between text-orange-500'}>
-      <label>Weight:</label>
-      <input type='number' {...register('weight')} />
-    </div>
-    <div className={'flex justify-between text-orange-500'}>
-      <label>Fighting Style:</label>
-      <input {...register('fightingStyle')} />
-    </div>
-    <div className={'flex justify-between text-orange-500'}>
-      <label>Location:</label>
-      <input {...register('location')} />
-    </div>
-    <div className={'flex justify-between text-orange-500'}>
-      <label>Profile Picture:</label>
-      <input type="file" 
-      accept="image/gif, image/jpeg, image/png" 
-      {...register('profilePicture')} />
+      <input className={"w-45"} {...register('name')} />
     </div>
     <Button type='submit' value='Sign Up' primary={true} />
   </form>

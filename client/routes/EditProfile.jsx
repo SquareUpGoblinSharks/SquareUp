@@ -2,22 +2,23 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { login, getUsers } from '../state/userSlice';
+import { login, getUsers } from '../state/userSlice.js';
 import { useForm } from 'react-hook-form';
 
 import HexGreenBGWrapper from '../components/HexGreenBGWrapper.jsx';
 import CenteredWrapper from '../components/CenteredWrapper.jsx';
 import SignupForm from '../components/SignupForm.jsx';
+import EditForm from '../components/EditForm.jsx';
 
-import client from '../lib/client';
+import client from '../lib/client.js';
 
-const Signup = () => {
+const EditProfile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
 
-  const SignupHandler = async(data) => {
+  const EditProfileHandler = async(data) => {
     const {profilePicture, ...body} = data;
     console.log('data', data)
     try{
@@ -77,7 +78,7 @@ const Signup = () => {
         <div class="flex bg-orange-200 p-10 rounded-lg shadow-lg flex-column items-center">
           
           <div className="flex justify-center items-center">
-            <SignupForm onSubmitHandler={SignupHandler}/>
+            <EditForm onSubmitHandler={EditProfileHandler}/>
           </div>
         </div>
       </CenteredWrapper>
@@ -85,4 +86,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default EditProfile;
