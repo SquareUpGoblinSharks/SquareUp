@@ -157,4 +157,37 @@ Controller.verifyUser = async (req, res, next) => {
   }
 };
 
+Controller.updateUser = async (req, res, next) => {
+  const {
+    name,
+    sex,
+    height,
+    weight,
+    age,
+    fightingStyle,
+  } = req.body;
+  try{
+    const search = await Profiles.findOne(user);
+    if(search){
+      search.name = name;
+      search.sex = sex;
+      search.height = height;
+      search.weight = weight;
+      search.age = age;
+      search.fightingStyle = fightingStyle;
+      await search.save();
+      return next();
+    }
+    else {
+      console.log('No such user');
+      return next();
+    }
+  }
+  catch (err) {
+    return next({
+      log: 'An error occured in userController.updateUser',
+      message: 'update failed'
+    })
+  }
+}
 module.exports = Controller;

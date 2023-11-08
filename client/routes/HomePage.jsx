@@ -5,13 +5,18 @@ import UpcomingMatches from '../components/UpcomingMatches';
 import ButtonBar from '../components/ButtonBar.jsx';
 import LogoutAndEdit from '../components/LogoutAndEdit.jsx';
 
+import HexGreenBGWrapper from '../components/HexGreenBGWrapper.jsx';
+import CenteredWrapper from '../components/CenteredWrapper.jsx';
+
 // useEffect(() => {
 
 // }, [Profile])
 
 const HomePage = () => {
   return (
-    <div className="mainContainer">
+    <HexGreenBGWrapper>
+      <CenteredWrapper>
+      <div className="mainContainer">
       <div className="leftContainer">
         <Leaderboard />
       </div>
@@ -24,6 +29,9 @@ const HomePage = () => {
         <UpcomingMatches />
       </div>
     </div>
+      </CenteredWrapper>
+    </HexGreenBGWrapper>
+   
   );
 };
 

@@ -3,10 +3,18 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { login, getUsers } from '../state/userSlice';
+import { useForm } from 'react-hook-form';
+
+import HexGreenBGWrapper from '../components/HexGreenBGWrapper.jsx';
+import CenteredWrapper from '../components/CenteredWrapper.jsx';
+
+import client from '../lib/client';
 
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { register, handleSubmit } = useForm();
+
   const onSignupHandler = async (event) => {
     event.preventDefault();
     const userObj = {
@@ -21,11 +29,12 @@ const Signup = () => {
       location: event.target.elements.location.value,
       profilePicture: '',
     };
-    console.log(event.target.elements.profilePicture.files[0]);
+
     const profilePicture = event.target.elements.profilePicture.files[0];
-    console.log(profilePicture);
+
     const formData = new FormData();
     formData.append('profilePicture', profilePicture);
+
     try {
       const createUserResponse = await fetch('http://localhost:8000/signup', {
         method: 'POST',
@@ -35,6 +44,7 @@ const Signup = () => {
         },
         body: JSON.stringify(userObj),
       });
+
       const createUserData = await createUserResponse.json();
       dispatch(login(createUserData));
 
@@ -78,109 +88,118 @@ const Signup = () => {
   };
 
   return (
-    <div class="signup">
-      <div className="sign-container">
-        <form className="signForm" onSubmit={onSignupHandler}>
-          <div className="form-group">
-            <label htmlFor="username" className="form-label">
-              Username:
-            </label>
-            <input
-              id="username"
-              name="username"
-              type="text"
-              className="form-input"
-            />
+    <HexGreenBGWrapper>
+      <CenteredWrapper>
+        <div class="signup">
+          <div className="sign-container">
+            <form className="signForm" onSubmit={onSignupHandler}>
+              <div className="form-group">
+                <label htmlFor="username" className="form-label">
+                  Username:
+                </label>
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  className="form-input"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password" className="form-label">
+                  Password:
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  className="form-input"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="name" className="form-label">
+                  Name:
+                </label>
+                <input id="name" name="name" className="form-input" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="sex" className="form-label">
+                  Sex:
+                </label>
+                <input id="sex" name="sex" className="form-input" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="age" className="form-label">
+                  Age:
+                </label>
+                <input
+                  id="age"
+                  name="age"
+                  type="number"
+                  className="form-input"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="height" className="form-label">
+                  Height:
+                </label>
+                <input
+                  id="height"
+                  name="height"
+                  type="number"
+                  className="form-input"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="weight" className="form-label">
+                  Weight:
+                </label>
+                <input
+                  id="weight"
+                  name="weight"
+                  type="number"
+                  className="form-input"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="fightingStyle" className="form-label">
+                  Fighting Style:
+                </label>
+                <input
+                  id="fightingStyle"
+                  name="fighting style"
+                  type="text"
+                  className="form-input"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="location" className="form-label">
+                  Location:
+                </label>
+                <input
+                  id="location"
+                  name="location"
+                  type="text"
+                  className="form-input"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="profilePicture" className="form-label">
+                  Profile Picture:
+                </label>
+                <input
+                  id="profilePicture"
+                  name="profilePicture"
+                  type="file"
+                  accept="image/gif, image/jpeg, image/png"
+                  className="form-input"
+                />
+              </div>
+              <input type="submit" value="Create User" className="submit-btn" />
+            </form>
           </div>
-          <div className="form-group">
-            <label htmlFor="password" className="form-label">
-              Password:
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              className="form-input"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="name" className="form-label">
-              Name:
-            </label>
-            <input id="name" name="name" className="form-input" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="sex" className="form-label">
-              Sex:
-            </label>
-            <input id="sex" name="sex" className="form-input" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="age" className="form-label">
-              Age:
-            </label>
-            <input id="age" name="age" type="number" className="form-input" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="height" className="form-label">
-              Height:
-            </label>
-            <input
-              id="height"
-              name="height"
-              type="number"
-              className="form-input"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="weight" className="form-label">
-              Weight:
-            </label>
-            <input
-              id="weight"
-              name="weight"
-              type="number"
-              className="form-input"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="fightingStyle" className="form-label">
-              Fighting Style:
-            </label>
-            <input
-              id="fightingStyle"
-              name="fighting style"
-              type="text"
-              className="form-input"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="location" className="form-label">
-              Location:
-            </label>
-            <input
-              id="location"
-              name="location"
-              type="text"
-              className="form-input"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="profilePicture" className="form-label">
-              Profile Picture:
-            </label>
-            <input
-              id="profilePicture"
-              name="profilePicture"
-              type="file"
-              accept="image/gif, image/jpeg, image/png"
-              className="form-input"
-            />
-          </div>
-          <input type="submit" value="Create User" className="submit-btn" />
-        </form>
-      </div>
-    </div>
+        </div>
+      </CenteredWrapper>
+    </HexGreenBGWrapper>
   );
 };
 
