@@ -8,7 +8,6 @@ const Controller = {};
 //gets all profiles in the mongodb
 Controller.getProfile = (req, res, next) => {
   const profileSize = 30;
-  console.log('test');
   Profiles.aggregate([{ $sample: { size: profileSize } }])
     .exec()
     .then((data) => {
@@ -70,7 +69,7 @@ Controller.updateWinsLosses = (req, res, next) => {
 };
 
 Controller.createUser = (req, res, next) => {
-  console.log('REQUESTBODY', req.body);
+  // console.log('REQUESTBODY', req.body);
   const {
     name,
     username,
@@ -121,28 +120,22 @@ Controller.verifyUser = (req, res, next) => {
   // console.log('TESTING');
   console.log('req body', req.body)
   const { username, password } = req.body;
-  console.log(username, password)
-  Profiles.findOne({ username: username, password: password }).exec()
+  console.log(req.body);
+  Profiles.findOne({ username: username, password: password })
     .then((user) => {
       if (!user) {
         res.status(401);
         // return res.redirect('/signup');
       }
-      console.log('user', user)
-      bcrypt.compare(password, user.password, (err, isMatch) => {
-        if (err) {
-          console.log('Error verifying user', err);
-          return next(err);
-        }
-        if (!isMatch) {
-          res.status(401);
-          // return res.redirect('/signup');
-        }
-        // console.log('user', user);
-        res.locals.userInfo = user;
+      // bcrypt.compare(password, user.password, (err, isMatch) => {
+      //   console.log('password', password);
+      //   if (err) {
+      //     console.log('Error verifying user', err);
+      //     return next(err);
+      //   }
+      res.locals.userInfo = user;
         return next();
-      });
-    })
+      })
     .catch((err) => {
       console.log('Error verifying user', err);
       next(err);
