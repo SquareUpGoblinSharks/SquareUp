@@ -10,7 +10,7 @@ const ButtonBar = ({ passHandleClick }) => {
       </button>
       <button id="maybe">MAYBE</button>
       <button id="squareUp">SQUARE UP</button>
-      <Button/>
+      <Button />
     </div>
   );
 };

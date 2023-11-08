@@ -5,7 +5,6 @@ import Login from './routes/Login.jsx';
 import Signup from './routes/Signup.jsx';
 import HomePage from './routes/HomePage.jsx';
 
-
 const App = () => {
   return (
     <Router>

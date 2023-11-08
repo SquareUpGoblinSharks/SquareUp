@@ -16,35 +16,45 @@ const Login = () => {
    * Fetch request should return user information.
    * If fetch request succeeds and state is updated with user info, redirect to '/'.
    */
-  
-  const onSubmit = async (data) => {
 
-    try{
-      
-      const response = await client.post('/login', data, {})
+  const onSubmit = async (data) => {
+    try {
+      const response = await client.post('/login', data, {});
       if (response.status === 200) {
         dispatch(login(response.data));
         const allUsersResponse = await client.get('/HomePage');
         if (allUsersResponse.status === 200) {
           dispatch(getUsers(allUsersResponse.data));
-          navigate('/home')
+          navigate('/home');
         }
       }
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   return (
-    <div className='login'>
-      <div className='logo'><a>Square UP!</a></div>
+    <div className="login">
+      <div className="logo">
+        <a>Square UP!</a>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input {...register('username')} placeholder="username" />
-        <input {...register('password')} type="password" placeholder="password" />
-        <input  className='button' type="submit" value="login" />
-        <button className='button' type='button' onClick={
-          () => {navigate('/signup')}
-        }>Create Account</button> 
+        <input
+          {...register('password')}
+          type="password"
+          placeholder="password"
+        />
+        <input className="button" type="submit" value="login" />
+        <button
+          className="button"
+          type="button"
+          onClick={() => {
+            navigate('/signup');
+          }}
+        >
+          Create Account
+        </button>
       </form>
     </div>
   );
