@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   content: ["./client/**/*.{html,js,jsx}"],
   theme: {
@@ -8,7 +11,9 @@ module.exports = {
       }
     },
     colors: {
+      orange: colors.orange,
       'squareup-teal': '#142e35',
+      
     }
   },
   plugins: [ "postcss-preset-env", 

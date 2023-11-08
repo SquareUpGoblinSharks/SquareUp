@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 
 import HexGreenBGWrapper from '../components/HexGreenBGWrapper.jsx';
 import CenteredWrapper from '../components/CenteredWrapper.jsx';
+import SignupForm from '../components/SignupForm.jsx';
 
 import client from '../lib/client';
 
@@ -92,7 +93,8 @@ const Signup = () => {
       <CenteredWrapper>
         <div class="signup">
           <div className="sign-container">
-            <form className="signForm" onSubmit={onSignupHandler}>
+            <SignupForm />
+            {/* <form className="signForm" onSubmit={onSignupHandler}>
               <div className="form-group">
                 <label htmlFor="username" className="form-label">
                   Username:
@@ -195,7 +197,7 @@ const Signup = () => {
                 />
               </div>
               <input type="submit" value="Create User" className="submit-btn" />
-            </form>
+            </form> */}
           </div>
         </div>
       </CenteredWrapper>

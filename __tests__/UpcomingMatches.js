@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import regeneratorRuntime from 'regenerator-runtime';
 import '@testing-library/jest-dom'
