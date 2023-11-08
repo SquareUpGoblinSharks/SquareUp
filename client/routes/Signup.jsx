@@ -16,6 +16,21 @@ const Signup = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
+
+  const SignupHandler = async(data) => {
+    const {profilePicture, ...body} = data;
+    const resp = await client.post('/signup', body);
+    if (resp.status === 200) {
+      dispatch(login(resp.data));
+      const allUsersResponse = await client.get('/HomePage');
+      if (allUsersResponse.status === 200) {
+        dispatch(getUsers(allUsersResponse.data));
+        navigate('/home');
+      }
+    } else {
+      navigate(0)
+    }
+  };
   const onSignupHandler = async (event) => {
     event.preventDefault();
     const userObj = {

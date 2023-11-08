@@ -4,6 +4,9 @@ import { useForm } from 'react-hook-form';
 import Button from './Button';
 
 
+import client from '../lib/client';
+
+
 const SignupForm = ({onSignupHandler}) => {
   const {register, handleSubmit } = useForm();
   const onSubmit = data => {
@@ -12,7 +15,11 @@ const SignupForm = ({onSignupHandler}) => {
   }
 
 //scratch
-const SignupHandler = async(data) => {};
+const SignupHandler = async(data) => {
+  const {profilePicture, ...body} = data;
+  const resp = await client.post('/signup', body);
+  
+};
 
 
 
