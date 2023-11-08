@@ -80,6 +80,7 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
         // console.log('testing get route');
         res.status(200).json(res.locals.profiles);
       });
+
       // error handling
       app.use((req, res) => {
         res.status(404).send('Not Found');

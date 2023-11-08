@@ -5,6 +5,9 @@ import { getUsers, login } from '../state/userSlice.js';
 import { useForm } from 'react-hook-form';
 
 import Button from '../components/Button.jsx';
+import HexGreenBGWrapper from '../components/HexGreenBGWrapper.jsx';
+import CenteredWrapper from '../components/CenteredWrapper.jsx';
+
 import client from '../lib/client.js';
 import Form from '../components/Form.jsx';
 
@@ -36,8 +39,8 @@ const Login = () => {
   }
 
   return (
-    <>
-    {/* Replace this with evan's container */}
+    <HexGreenBGWrapper>
+      <CenteredWrapper>
       <h3>Square Up!</h3>
       <Form
         onSubmit={onSubmit}
@@ -79,7 +82,9 @@ const Login = () => {
         primary={false}
         value={'Create Account'}
       />
-    </>
+      </CenteredWrapper>
+    </HexGreenBGWrapper>
+    
   );
 };
 

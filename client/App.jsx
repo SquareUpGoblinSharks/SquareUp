@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './routes/Login.jsx';
 import Signup from './routes/Signup.jsx';
 import HomePage from './routes/HomePage.jsx';
-
+import Prototype from './routes/Prototype.jsx';
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
         {/* <Route path="/" element={<HomePage />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-
+        <Route path="/prototype" element={<Prototype />} />
         {<Route path="*" element={<Login />} />}
         {/* <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} /> */}
