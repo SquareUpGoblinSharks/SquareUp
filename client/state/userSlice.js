@@ -9,16 +9,24 @@ import client from '../lib/client.js';
 //           dispatch(getUsers(allUsersResponse.data));
 //           navigate('/home')
 
-export const loginAndFetchUsers = createAsyncThunk(
+export const loginUser = createAsyncThunk(
   'user/login',
-  async(data) => {
+  async(data, thunkAPI) => {
     try{
       const response = await client.post('/login', data, {});
-      if(response.status = 200);
-      dispatch(login(response.data))
+      if(response.status = 200) {
+        return response.data
+      } else {
+        return thunkAPI.rejectWithValue(`user/login: bad status: ${response.status}`);
+      }
+    } catch(err) {
+      if (err.response && err.response.data.message) {
+        return thunkAPI.rejectWithValue(err.response.data.message);
+      } else {
+        return thunkAPI.rejectWithValue(err.message);
+      }
     }
-  }
-)
+})
 
 const initialState = {
   user: {
@@ -33,7 +41,10 @@ const initialState = {
     totalWins: null,
     totalLosses: null,
   },
+  userStatus: 'idle', // pending, success, failure
   users: [],
+  allUsersStatus: 'idle',
+  error: null,
   upcomingMatches: [],
 };
 
@@ -51,6 +62,22 @@ export const userSlice = createSlice({
       state.users.push(action.payload);
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(loginUser.pending, (state, action)=> {
+
+      })
+      .addCase(loginUser.fulfilled, (state, action)=> {
+        state.user = action.payload.user;
+      })
+      .addCase(loginUser.rejected, (state, action)=> {
+        state.userStatus = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(getAllUsers.pending)
+  }
+
+
 });
 
 export const { login, getUsers, addMatch } = userSlice.actions;
