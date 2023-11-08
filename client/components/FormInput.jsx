@@ -13,7 +13,7 @@ const FormInput = forwardRef(
       <input
         {...props}
         ref={ref}
-        className=''
+        className='m-1 rounded border-2'
       />
     )
   }
