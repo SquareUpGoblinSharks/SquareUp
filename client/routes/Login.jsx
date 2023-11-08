@@ -31,13 +31,13 @@ const Login = () => {
         console.log('allUsersResponse ',allUsersResponse)
         if (allUsersResponse.status === 200) {
           dispatch(getUsers(allUsersResponse.data));
-          navigate('/home')
+          navigate('/home');
         }
       }
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   return (
     <HexGreenBGWrapper>

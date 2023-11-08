@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Button = ({value, onClickFunc, primary, type, additionalClasses}) => {
   // Adding for testing - will remove later
@@ -12,7 +12,7 @@ const Button = ({value, onClickFunc, primary, type, additionalClasses}) => {
       type={type ? type : 'button'}
     >{value}
     </button>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;
