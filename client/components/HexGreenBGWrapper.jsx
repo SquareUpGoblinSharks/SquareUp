@@ -1,13 +1,13 @@
 import React from 'react';
 
-const HexGreenBGWrapper = ({ children }) => {
+const BackgroundWrapper = ({ children }) => {
 
   return (
-    <div className={'h-full w-full bg-hexagons bg-squareup-teal'}>
+    <div className={'h-full w-full bg-slate-100'}>
       {children}
     </div>
   );
 
 };
 
-export default HexGreenBGWrapper;
+export default BackgroundWrapper;
