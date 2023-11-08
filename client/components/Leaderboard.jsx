@@ -21,6 +21,13 @@ const Leaderboard = () => {
 
   console.log('LISTOFUSERS', users);
 
+  // if (users.length > 0) {
+  //   const sortedUsers = [...users]
+  //     .sort((a, b) => b.totalWins - a.totalWins)
+  //     .slice(0, 7); // Slice the top 5
+  //   setUserList(sortedUsers);
+  // }
+
   return (
     <>
       <div className="leaderboard">
