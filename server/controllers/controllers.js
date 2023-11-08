@@ -118,9 +118,7 @@ Controller.addProfilePicture = (req, res, next) => {
 
 Controller.verifyUser = (req, res, next) => {
   // console.log('TESTING');
-  console.log('req body', req.body)
   const { username, password } = req.body;
-  console.log(req.body);
   Profiles.findOne({ username: username, password: password })
     .then((user) => {
       if (!user) {

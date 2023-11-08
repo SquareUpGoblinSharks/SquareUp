@@ -22,7 +22,10 @@ const upload = multer({ storage: storage });
 const PORT = 8000;
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+   credentials: true,
+}));
 // this is temporary, insert real url later
 // created in models.js so not needed here
 // const mongoURI = process.env.NODE_ENV === 'test' ? 'mongodb://localhost/SquareUp' : 'mongodb://localhost/SquareUp';
@@ -69,6 +72,7 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
       
       // login
       app.post('/login', Controller.verifyUser, (req, res) => {
+        console.log('info', res.locals.userInfo)
         res.status(200).json(res.locals.userInfo);
       });
       
