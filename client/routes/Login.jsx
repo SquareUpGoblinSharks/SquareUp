@@ -21,9 +21,7 @@ const Login = () => {
 
     try{
       
-      const response = await client.post('/login', data, {
-        headers: {'Content-type': 'application/json'}
-      })
+      const response = await client.post('/login', data, {})
       if (response.status === 200) {
         const allUsersResponse = await client.get('/HomePage');
         if (allUsersResponse.status === 200) {
