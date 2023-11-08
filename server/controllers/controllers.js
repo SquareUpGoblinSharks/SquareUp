@@ -119,13 +119,16 @@ Controller.addProfilePicture = (req, res, next) => {
 
 Controller.verifyUser = (req, res, next) => {
   // console.log('TESTING');
+  console.log('req body', req.body)
   const { username, password } = req.body;
-  Profiles.findOne({ username: username, password: password })
+  console.log(username, password)
+  Profiles.findOne({ username: username, password: password }).exec()
     .then((user) => {
       if (!user) {
         res.status(401);
         // return res.redirect('/signup');
       }
+      console.log('user', user)
       bcrypt.compare(password, user.password, (err, isMatch) => {
         if (err) {
           console.log('Error verifying user', err);

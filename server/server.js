@@ -56,7 +56,7 @@ app.get('/HomePage', Controller.getProfile, (req, res) => {
 });
 
 app.post('/', Controller.createUser, (req, res) => {
-  res.status(200).json();
+  res.status(200).json(res.locals.user);
 });
 // express routes
 //WHERE ARE WE ROUTING TO FOR APP.GET !!!!!!!!!!!!!
@@ -68,15 +68,12 @@ app.get('/', (req, res) => {
 // signup
 // redirect to the sign up page when a sign up button gets pushed
 app.get('/signup', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/signup.jsx'));
+  res.sendFile(path.resolve(__dirname, '../client/routes/Signup.jsx'));
 });
 
 // this is for after you enter your information
 // creates user and then redirects them to the homepage
 app.post('/signup', Controller.createUser, (req, res) => {
-
-  res.status(200);
-
   res.status(200).json(res.locals.user);
 
 });
