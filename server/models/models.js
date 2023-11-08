@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+// const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
 const MONGO_URI = process.env.DB_URI;
@@ -66,23 +66,23 @@ const profileSchema = new Schema({
   },
 });
 
-const SALT_WORK_FACTOR = 5;
+// const SALT_WORK_FACTOR = 5;
 
-profileSchema.pre('save', async function (next) {
-  try {
-    if (this.isModified('password')) {
-      // Hash the password using bcrypt
-      const hashedPassword = await bcrypt.hash(this.password, SALT_WORK_FACTOR);
+// profileSchema.pre('save', async function (next) {
+//   try {
+//     if (this.isModified('password')) {
+//       // Hash the password using bcrypt
+//       const hashedPassword = await bcrypt.hash(this.password, SALT_WORK_FACTOR);
 
-      // Set the hashed password as the user's password
-      this.password = hashedPassword;
-      console.log('PASSWORD', this.password);
-    }
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
+//       // Set the hashed password as the user's password
+//       this.password = hashedPassword;
+//       // console.log('PASSWORD', this.password);
+//     }
+//     next();
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 const Profiles = mongoose.model('profile', profileSchema);
 
