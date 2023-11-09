@@ -40,7 +40,7 @@ const Profile = () => {
     setUserList((prev) => prev.slice(0, -1));
   };
 
-  console.log(userList);
+
 
   //always render the last user on the array of object of the profiles
   const lastUser = userList[userList.length - 1];

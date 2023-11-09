@@ -10,12 +10,9 @@ const EditProfileForm = ({onSubmitHandler, defaultData}) => {
   const {register, handleSubmit } = useForm();
   const [gender, setGender] = useState(defaultData.sex);
   const onSubmit = data => {
-    console.log('hello from onSubmit')
+
     onSubmitHandler(data);
   }
-
-
-console.log(defaultData)
 
 return (
   <form className={'flex flex-col text-orange-500'} onSubmit={handleSubmit(onSubmit)}> 
