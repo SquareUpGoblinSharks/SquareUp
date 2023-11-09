@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-require('dotenv').config();
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+require("dotenv").config();
 const SALT_WORK_FACTOR = 10;
 
 const MONGO_URI = process.env.DB_URI;
@@ -11,9 +11,9 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
     // sets the name of the DB that our collections are part of
-    dbName: 'SquareUp',
+    dbName: "SquareUp",
   })
-  .then(() => console.log('Connected to Mongo DB.'))
+  .then(() => console.log("Connected to Mongo DB."))
   .catch((err) => console.log(err));
 
 const Schema = mongoose.Schema;
@@ -76,6 +76,6 @@ profileSchema.pre("save", function (next) {
   });
 });
 
-const Profiles = mongoose.model('profile', profileSchema);
+const Profiles = mongoose.model("profile", profileSchema);
 
 module.exports = Profiles;
