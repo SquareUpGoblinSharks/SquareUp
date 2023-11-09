@@ -168,6 +168,7 @@ Controller.updateUser = async (req, res, next) => {
     weight,
     age,
     fightingStyle,
+    location,
   } = req.body;
   try{
     const search = await Profiles.findOne({_id: id});
@@ -178,6 +179,7 @@ Controller.updateUser = async (req, res, next) => {
       search.weight = weight;
       search.age = age;
       search.fightingStyle = fightingStyle;
+      search.location = location;
       await search.save();
       return next();
     }
