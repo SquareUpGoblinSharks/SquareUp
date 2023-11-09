@@ -33,19 +33,20 @@ const useAuth = (navigateSuccess, navigateFailure) => {
 
 
   useEffect(()=>{
-    client.get('/verifyCookie')
-      .then(resp => {
-       
-        if(resp.data.verified) {
-          navigateWrapper(navigateSuccess);
-        } else {
+    if (navigateFailure || navigateSuccess) {
+      client.get('/verifyCookie')
+        .then(resp => {
+          if(resp.data.verified) {
+            navigateWrapper(navigateSuccess);
+          } else {
+            navigateWrapper(navigateFailure, true);
+          }
+        })
+        .catch(err => {
+          console.log('error was caught', err.response.data)
           navigateWrapper(navigateFailure, true);
-        }
-      })
-      .catch(err => {
-        console.log('error was caught', err.response.data)
-        navigateWrapper(navigateFailure, true);
-      })
+        })
+    }
   },[ssid])
 
   
