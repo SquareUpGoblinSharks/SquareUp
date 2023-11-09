@@ -36,6 +36,8 @@ const Profile = () => {
     dispatch(addMatch(lastUser));
   };
 
+
+
   //always render the last user on the array of object of the profiles
   const lastUser = userList[userList.length - 1];
 

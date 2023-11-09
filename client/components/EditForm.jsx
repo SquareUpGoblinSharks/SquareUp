@@ -10,12 +10,9 @@ const EditProfileForm = ({onSubmitHandler, defaultData}) => {
   const {register, handleSubmit } = useForm();
   const [gender, setGender] = useState(defaultData.sex);
   const onSubmit = data => {
-    console.log('hello from onSubmit')
+
     onSubmitHandler(data);
   }
-
-
-console.log(defaultData)
 
 return (
   <form className={'flex flex-col text-orange-500'} onSubmit={handleSubmit(onSubmit)}> 
@@ -58,7 +55,7 @@ return (
     </div>
     <div className={'flex justify-between mt-1 mb-4'}>
       <label>Location:</label>
-      <input placeholder={defaultData.location} {...register('fightingStyle')} />
+      <input placeholder={defaultData.location} {...register('location')} />
     </div>
 
     {/*
