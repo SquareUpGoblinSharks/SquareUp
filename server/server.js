@@ -9,16 +9,8 @@ const dotenv = require('dotenv');
 const multer = require('multer'); // for uploading images?
 
 // Profile picture storage configuration
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, './public');
-//   },
-//   filename: (req, file, cb) => {
-//     // console.log(file);
-//     cb(null, Date.now() + path.extname(file.originalname));
-//   },
-// });
-// const upload = multer({ storage: storage });
+
+const upload = multer({ storage: storage });
 
 //checking
 const PORT = 8000;
