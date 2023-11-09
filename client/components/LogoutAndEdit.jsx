@@ -1,18 +1,16 @@
 import React from 'react';
 import useAuth from '../lib/useAuth.js';
+import { useNavigate } from 'react-router-dom';
 
 const LogoutAndEdit = () => {
-
+  const navigate = useNavigate();
   const { failure } = useAuth();
-  function clickHandler() {
-    failure('/');
-  }
   
   return (
     <div id='logoutAndEdit'>
-      <button id="edit" role="button" type='submit'>EDIT PROFILE</button>
+      <button id="edit" role="button" type='submit' onClick={()=> navigate('/edit-profile')}>EDIT PROFILE</button>
       <br/>
-      <button id="logout" onClick={clickHandler} role="button" type='submit'>LOGOUT</button>
+      <button id="logout" onClick={()=> failure('/')} role="button" type='submit'>LOGOUT</button>
     </div>
   );
 };
