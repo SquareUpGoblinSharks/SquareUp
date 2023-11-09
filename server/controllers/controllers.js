@@ -7,12 +7,13 @@ const Controller = {};
 // insert another middleware here to to retrive info from database and display
 //gets all profiles in the mongodb
 Controller.getProfile = (req, res, next) => {
-  const profileSize = 30;
-  Profiles.aggregate([{ $sample: { size: profileSize } }])
+  const profileSize = 300;
+  Profiles //.aggregate([{ $sample: { size: profileSize } }])
+    .find()
     .exec()
     .then((data) => {
       res.locals.profiles = data;
-      // console.log('FINDING USER DATA:', data);
+      // console.log('Count USER DATA:', data.length);
       return next();
     })
     .catch((err) => {
@@ -160,17 +161,18 @@ Controller.verifyUser = async (req, res, next) => {
 };
 
 Controller.updateUser = async (req, res, next) => {
+  const id = req.cookie.ssid;
   const {
-    username,
     name,
     sex,
     height,
     weight,
     age,
     fightingStyle,
+    location,
   } = req.body;
   try{
-    const search = await Profiles.findOne({username: username});
+    const search = await Profiles.findOne({_id: id});
     if(search){
       search.name = name;
       search.sex = sex;
@@ -178,6 +180,7 @@ Controller.updateUser = async (req, res, next) => {
       search.weight = weight;
       search.age = age;
       search.fightingStyle = fightingStyle;
+      search.location = location;
       await search.save();
       return next();
     }

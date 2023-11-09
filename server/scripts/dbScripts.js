@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 createTestUsers = async (i) => {
   const data = await Profiles.create({
     name: `name_${i}`,
-    username: `username_${i}`,
+    username: `usernameAgain_${i}`,
     password: `password_${i}`,
     profilePicture: 'none',
     sex: i % 2 === 0 ? 'M' : 'F',

@@ -1,16 +1,17 @@
 import React from 'react';
 import useAuth from '../lib/useAuth.js';
 import { useNavigate } from 'react-router-dom';
+import Button from './Button.jsx';
 
 const LogoutAndEdit = () => {
   const navigate = useNavigate();
   const { failure } = useAuth();
   
   return (
-    <div id='logoutAndEdit'>
-      <button id="edit" role="button" type='submit' onClick={()=> navigate('/edit-profile')}>EDIT PROFILE</button>
+    <div id='logoutAndEdit' className='z-10 self-start'>
+      <Button onClickFunc={()=> navigate('/edit-profile')} value={'Edit Profile'}  primary={true}/>
       <br/>
-      <button id="logout" onClick={()=> failure('/')} role="button" type='submit'>LOGOUT</button>
+      <Button onClickFunc={()=> failure('/')} value={'Logout'}  primary={false}/>
     </div>
   );
 };
