@@ -14,6 +14,8 @@ const useAuth = (navigateSuccess, navigateFailure) => {
 
   //add handles to hook return
   handles.clearCookie = () => {removeCookie('ssid')}
+  handles.setCookie = (value) => {setCookie('ssid', value)}
+  handles.getCookie = () => {return cookies['ssid']}
   handles.debug = () => {return {ssidCookie: cookies.ssid, navigateSuccess, navigateFailure}};
   handles.success = (path) => {
     if (!path && navigateFailure) navigateWrapper(navigateSuccess)

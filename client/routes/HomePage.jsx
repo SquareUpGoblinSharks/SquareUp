@@ -1,7 +1,7 @@
 // react/redux
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers, getUsers, login } from '../state/userSlice.js';
+import { getAllUsers, getUsers, login, assignToken } from '../state/userSlice.js';
 
 // components
 import Profile from '../components/Profile.jsx';
@@ -22,10 +22,23 @@ import { data } from 'autoprefixer';
 const HomePage = () => {
   const dispatch = useDispatch();
   // const {users} = useSelector(state => state.userSlice);
-
+  const { getCookie } = useAuth(null, '/Login');
   useEffect( () => {
     dispatch(getAllUsers());
   }, []);
+
+  useEffect(()=>{
+    client.get('/verifyCookie')
+      .then(resp=> {
+        console.log(resp)
+        if (resp.data.verified === true) {
+          dispatch(login(resp.data.data))
+          dispatch(assignToken(getCookie()))
+        }
+      })
+  },[]);
+
+
 
 
   // // Testing - can be removed later
@@ -33,7 +46,7 @@ const HomePage = () => {
   //   console.log(users[0]);
   // }, [users])
 
-  useAuth(null, '/Login');
+  
   return (
     <BackgroundWrapper>
       <CenteredWrapper>

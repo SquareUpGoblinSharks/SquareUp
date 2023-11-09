@@ -1,39 +1,37 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { login, getUsers } from '../state/userSlice';
+import { login, getUsers, signupUser } from '../state/userSlice';
 import { useForm } from 'react-hook-form';
 
 import BackgroundWrapper from '../components/BackgroundWrapper.jsx';
 import CenteredWrapper from '../components/CenteredWrapper.jsx';
 import SignupForm from '../components/SignupForm.jsx';
-
+import useAuth from '../lib/useAuth.js';
 import client from '../lib/client';
 
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-
+  const { setCookie, success, failure } = useAuth('/home')
+  const userToken = useSelector(state => state.userSlice.userToken);
 
   const SignupHandler = async(data) => {
     const body = data;
-    console.log('data', data)
-    try{
-      const resp = await client.post('/signup', body);
-      if (resp.status === 200) {
-        dispatch(login(resp.data));
-        navigate('/home');
-      } else {
-        throw new Error(`Signup Handler Status: ${resp.status}`)
-        //navigate(0)
-      }
-    } catch(err) {
-      console.error(err);
-    }
-    
+    dispatch(signupUser(data))
   };
+
+  useEffect(()=>{
+    if (userToken) {
+      setCookie(userToken);
+      success();
+    } else {
+      failure(0)
+    }
+  }, [userToken]);
+
 
       /** THE ISSUE WITH PROFILE PICTURES IS THAT WE WERE ABLE TO UPLOAD AND STORE THE IMAGES LOCALLY,
        *  AND WE WANTED TO STORE THE IMAGE PATH IN THE DATABASE,

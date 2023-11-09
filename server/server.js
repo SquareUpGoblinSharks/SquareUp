@@ -56,16 +56,23 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
       
       // this is for after you enter your information
       // creates user and then redirects them to the homepage
-      app.post('/signup', Controller.createUser, Controller.verifyUser, cookieController.setSSIDCookie, (req, res) => {
+      app.post('/signup', 
+      Controller.createUser, 
+      Controller.verifyUser, 
+      cookieController.produceJWT, 
+      cookieController.setSSIDCookie, (req, res) => {
         // console.log('res.cookies from signup', res.locals.cookies);
-        res.status(200).json(res.locals.user);
+        res.status(200).json({userInfo: res.locals.user, token: res.locals.token });
       });
       
       // login
-      app.post('/login', Controller.verifyUser, cookieController.setSSIDCookie, (req, res) => {
-        // console.log('cookies from login ', res.locals.cookies);
-        console.log(req.cookies);
-        res.status(200).json(res.locals.userInfo);
+      app.post('/login', 
+        Controller.verifyUser, 
+        cookieController.produceJWT, 
+        (req, res) => {
+        console.log('login end of Route', res.locals.userInfo, res.locals.token)
+        
+        res.status(200).json({userInfo: res.locals.userInfo, token: res.locals.token});
       });
 
       app.get('/verifyCookie', Controller.verifyCookie, (req, res) => {
@@ -84,6 +91,8 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
         console.log('clearing cookies...')
         res.status(200).clearCookie('ssid');
       })
+
+
       app.patch('/editProfile', Controller.updateUser, (req, res) => {
         console.log('update request completed');
         res.status(200).json();

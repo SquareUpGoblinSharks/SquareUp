@@ -19,7 +19,26 @@ export const loginUser = createAsyncThunk(
         return thunkAPI.rejectWithValue(err.message);
       }
     }
-})
+});
+
+export const signupUser = createAsyncThunk(
+  'user/signupAsync',
+  async(data, thunkAPI) => {
+    try{
+      const response = await client.post('/signup', data, {});
+      if(response.status = 200) {
+        return response.data
+      } else {
+        return thunkAPI.rejectWithValue(`user/login: bad status: ${response.status}`);
+      }
+    } catch(err) {
+      if (err.response && err.response.data.message) {
+        return thunkAPI.rejectWithValue(err.response.data.message);
+      } else {
+        return thunkAPI.rejectWithValue(err.message);
+      }
+    }
+});
 
 export const getAllUsers = createAsyncThunk(
   'user/getAllUsersAsync',
@@ -38,7 +57,8 @@ export const getAllUsers = createAsyncThunk(
         return thunkAPI.rejectWithValue(err.message);
       }
     }
-})
+});
+
 
 const initialState = {
   user: {
@@ -54,6 +74,7 @@ const initialState = {
     totalLosses: null,
   },
   userStatus: 'idle', // pending, success, failure
+  userToken: null, 
   users: [],
   allUsersStatus: 'idle',
   error: null,
@@ -66,6 +87,24 @@ export const userSlice = createSlice({
   reducers: {
     login: (state, action) => {
       state.user = Object.assign(state.user, action.payload);
+    },
+    assignToken: (state, action) => {
+      state.userToken = action.payload;
+    },
+    logout: (state, action) => {
+      state.userToken = null;
+      state.user.name = null;
+      state.user.username = null;
+      state.user.password = null;
+      state.user.profilePicture = null;
+      state.user.sex = null;
+      state.user.height = null;
+      state.user.weight = null;
+      state.user.fightingStyle = null;
+      state.user.totalWins = null;
+      state.user.totalLosses = null;
+      state.userStatus = 'idle';
+      state.error = 'null'
     },
     getUsers: (state, action) => {
       state.users = action.payload;
@@ -80,7 +119,9 @@ export const userSlice = createSlice({
         state.userStatus = 'pending';
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        console.log('state payload', action.payload)
+        state.user = action.payload.userInfo;
+        state.userToken = action.payload.token;
         state.userStatus = 'success';
       })
       .addCase(loginUser.rejected, (state, action) => {
@@ -98,11 +139,23 @@ export const userSlice = createSlice({
         state.allUsersStatus = 'failure'
         state.error = action.error.message;
       })
+      .addCase(signupUser.pending, (state, action) => {
+        state.userStatus = 'pending';
+      })
+      .addCase(signupUser.fulfilled, (state, action)=> {
+        state.user = action.payload.userInfo;
+        state.userToken = action.payload.token;
+        state.userStatus = 'success';
+      })
+      .addCase(signupUser.rejected, (state, action)=>{
+        state.userStatus = 'failure';
+        state.error = action.error.message;
+      })
   }
 
 
 });
 
-export const { login, getUsers, addMatch } = userSlice.actions;
+export const { login, getUsers, addMatch, assignToken } = userSlice.actions;
 
 export default userSlice.reducer;
