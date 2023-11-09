@@ -160,8 +160,8 @@ Controller.verifyUser = async (req, res, next) => {
 };
 
 Controller.updateUser = async (req, res, next) => {
+  const id = req.cookie.ssid;
   const {
-    username,
     name,
     sex,
     height,
@@ -170,7 +170,7 @@ Controller.updateUser = async (req, res, next) => {
     fightingStyle,
   } = req.body;
   try{
-    const search = await Profiles.findOne({username: username});
+    const search = await Profiles.findOne({_id: id});
     if(search){
       search.name = name;
       search.sex = sex;
