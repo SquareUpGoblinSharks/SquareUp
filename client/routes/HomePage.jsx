@@ -6,16 +6,12 @@ import { getAllUsers, getUsers, login, assignToken } from '../state/userSlice.js
 // components
 import Profile from '../components/Profile.jsx';
 import Leaderboard from '../components/Leaderboard.jsx';
-import UpcomingMatches from '../components/UpcomingMatches';
+import UpcomingMatches from '../components/UpcomingMatches.jsx';
 import LogoutAndEdit from '../components/LogoutAndEdit.jsx';
 import CenteredWrapper from '../components/CenteredWrapper.jsx';
 import useAuth from '../lib/useAuth.js';
 import BackgroundWrapper from '../components/BackgroundWrapper.jsx';
 import client from '../lib/client.js';
-import userSlice from '../state/userSlice.js';
-// Not sure what this is??
-import { async } from 'regenerator-runtime';
-import { data } from 'autoprefixer';
 
 
 
@@ -58,7 +54,6 @@ const HomePage = () => {
         </div>
       </CenteredWrapper>
     </BackgroundWrapper>
-
   );
 };
 

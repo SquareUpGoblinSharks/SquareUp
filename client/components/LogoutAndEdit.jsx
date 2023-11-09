@@ -1,5 +1,6 @@
 import React from 'react';
 import useAuth from '../lib/useAuth.js';
+import { useNavigate } from 'react-router-dom';
 import Button from './Button.jsx';
 import { useNavigate } from 'react-router-dom';
 
