@@ -146,7 +146,7 @@ Controller.verifyUser = async (req, res, next) => {
       } else {
         res.locals.userInfo = user; 
         res.locals._id = user._id;
-        console.log(user._id);
+        // console.log(user._id);
         return next();
       }
     }
@@ -191,6 +191,29 @@ Controller.updateUser = async (req, res, next) => {
       log: 'An error occured in userController.updateUser',
       message: 'update failed'
     })
+  }
+}
+
+Controller.verifyCookie = async (req, res, next) => {
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    const search = await Profiles.findById(decoded.id);
+    const response = {};
+    if(search) {
+      response.verified = true;
+      response.data = search;
+    }
+    else {
+      response.verified = false;
+      response.data = null;
+      res.clearCookie('ssid');
+    }
+    res.locals.response = response;
+    return next();
+  }
+  catch(err){
+    console.error('You got the wrong flavor of cookies');
+    return next(err);
   }
 }
 module.exports = Controller;

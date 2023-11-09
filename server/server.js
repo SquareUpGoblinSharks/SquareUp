@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const Controller = require('./controllers/controllers');
 const cookieController = require('./controllers/cookieController');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const multer = require('multer'); // for uploading images?
@@ -23,6 +24,7 @@ const multer = require('multer'); // for uploading images?
 const PORT = 8000;
 
 const app = express();
+
 app.use(cors({
   origin: 'http://localhost:3000',
    credentials: true,
@@ -35,7 +37,7 @@ app.use(cors({
 // automatically parse url encoded body content and form data rom incoming requrests and place it in req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cookieParser());
 app.use('/client', express.static(path.resolve(__dirname, '../client')));
 
 /** Profile picture upload endpoints */
@@ -67,16 +69,22 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
       
       // this is for after you enter your information
       // creates user and then redirects them to the homepage
-      app.post('/signup', Controller.createUser, (req, res) => {
+      app.post('/signup', Controller.createUser, Controller.verifyUser, cookieController.setSSIDCookie, (req, res) => {
+        // console.log('res.cookies from signup', res.locals.cookies);
         res.status(200).json(res.locals.user);
       });
       
       // login
       app.post('/login', Controller.verifyUser, cookieController.setSSIDCookie, (req, res) => {
-        console.log('info', res.locals.userInfo);
+        // console.log('cookies from login ', res.locals.cookies);
+        console.log(req.cookies);
         res.status(200).json(res.locals.userInfo);
       });
-      
+
+      app.get('/verifyCookie', Controller.verifyCookie, (req, res) => {
+        res.status(200).json(res.locals.response);
+      });
+
       app.get('/Leaderboard', Controller.getProfile, (req, res) => {
         // console.log('testing get route');
         res.status(200).json(res.locals.profiles);
@@ -86,9 +94,8 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
       })
 
       app.get('/logout', (req, res) => {
-        document.cookie = "name='ssid' expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        res.sendFile(path.resolve(__dirname, '../client/index.html'));
-        // res.sendFile(path.resolve(__dirname, '../client/routes/Login.jsx'));
+        console.log('clearing cookies...')
+        res.status(200).clearCookie('ssid');
       })
       app.patch('/editProfile', Controller.updateUser, (req, res) => {
         console.log('update request completed');
