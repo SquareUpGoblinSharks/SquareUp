@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import ButtonBar from './ButtonBar';
+import UserProfileDetails from './UserProfileDetails';
 
 const Profile = () => {
   const users = useSelector(({ userSlice }) => userSlice.users);
@@ -45,31 +46,38 @@ const Profile = () => {
   const lastUser = userList[userList.length - 1];
   // console.log('TESTING------------', users);
 
-  return (
-    <div className="profileContainer">
-      <div className="profilePicture"></div>
-      {lastUser && (
-        // <div class='stat-style'>
-        <div className="stats">
-          <li>Username: {lastUser.username}</li>
-          <li>Age: {lastUser.age}</li>
-          <li>Sex: {lastUser.sex}</li>
-          <li>Weight: {lastUser.weight}</li>
-          <li>Height: {lastUser.height}</li>
-          <li>Fighting Style: {lastUser.fightingStyle}</li>
-          <li>Wins: {lastUser.totalWins}</li>
-          <li>Losses: {lastUser.totalLosses}</li>
+  if (lastUser) {
+    return (
+      <div className='bg-central-blue m-5 p-5 border-2 overflow-scroll max-h-full rounded-lg border-gray-700 h-[90vh]' >
+        <div className='flex align-center justify-center p-2'>
+          <h1 className='text-2xl font-bold text-slate-800 my-2'>{lastUser.username}</h1>
         </div>
-        // </div>
-      )}
-      <ButtonBar
-        passHandleClick={passHandleClick}
-        squareUpHandleClick={squareUpHandleClick}
-      />
-    </div>
-  );
-};
+        <div className="profilePicture max-w-sm">
+          <img className='max-w-full	h-auto' src="https://i.pinimg.com/originals/69/1d/29/691d293ee7b65eb6b8be210918f24d09.png" alt="Next Opponent" />
+        </div>
 
-//return (  <div> HELO </div>  <div> BYE </div>)
+
+        <ul className='grid grid-cols-2 gap-4 text-sm p-4'>
+          <UserProfileDetails value={lastUser.fightingStyle} additionalClasses={'col-span-2'}/>
+          <UserProfileDetails value={lastUser.age}/>
+          <UserProfileDetails value={lastUser.sex}/>
+          <UserProfileDetails value={lastUser.weight}/>
+          <UserProfileDetails value={lastUser.height}/>
+          <UserProfileDetails value={lastUser.totalWins}/>
+          <UserProfileDetails value={lastUser.totalLosses}/>
+        </ul>
+
+        <ButtonBar
+          passHandleClick={passHandleClick}
+          squareUpHandleClick={squareUpHandleClick}
+        />
+      </div>
+    )
+  } else {
+    return (
+      <h1>"No athletes left!"</h1>
+    )
+  }
+};
 
 export default Profile;

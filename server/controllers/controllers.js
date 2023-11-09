@@ -7,12 +7,13 @@ const Controller = {};
 // insert another middleware here to to retrive info from database and display
 //gets all profiles in the mongodb
 Controller.getProfile = (req, res, next) => {
-  const profileSize = 30;
-  Profiles.aggregate([{ $sample: { size: profileSize } }])
+  const profileSize = 300;
+  Profiles //.aggregate([{ $sample: { size: profileSize } }])
+    .find()
     .exec()
     .then((data) => {
       res.locals.profiles = data;
-      // console.log('FINDING USER DATA:', data);
+      // console.log('Count USER DATA:', data.length);
       return next();
     })
     .catch((err) => {
