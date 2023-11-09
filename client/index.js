@@ -7,6 +7,7 @@ import './styles.scss';
 import { CookiesProvider } from 'react-cookie';
 
 const root = createRoot(document.getElementById('root'));
+
 root.render(
   <Provider store={store}>
     <CookiesProvider >
