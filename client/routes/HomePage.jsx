@@ -7,12 +7,14 @@ import LogoutAndEdit from '../components/LogoutAndEdit.jsx';
 
 import HexGreenBGWrapper from '../components/HexGreenBGWrapper.jsx';
 import CenteredWrapper from '../components/CenteredWrapper.jsx';
+import useAuth from '../lib/useAuth.js';
 
 // useEffect(() => {
 
 // }, [Profile])
 
 const HomePage = () => {
+  useAuth(null, '/Login');
   return (
     <HexGreenBGWrapper>
       <CenteredWrapper>

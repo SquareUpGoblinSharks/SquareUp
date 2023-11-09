@@ -6,7 +6,7 @@ const config = {
   entry: { bundle: path.resolve(__dirname, 'client/index.js') },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.bundle.js',
+    // filename: 'index.bundle.js',
     clean: true,
     assetModuleFilename: '[name][ext]',
   },
@@ -52,7 +52,7 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Development',
-      filename: 'index.html',
+      //filename: 'index.html',
       template: 'client/index.html',
     }),
   ],

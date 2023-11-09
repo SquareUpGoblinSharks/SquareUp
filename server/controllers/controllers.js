@@ -1,7 +1,7 @@
 const Profiles = require('../models/models');
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
-
+const jwt = require('jsonwebtoken')
 const Controller = {};
 
 // insert another middleware here to to retrive info from database and display
@@ -196,6 +196,8 @@ Controller.updateUser = async (req, res, next) => {
 
 Controller.verifyCookie = async (req, res, next) => {
   try {
+    console.log(req.cookies)
+    const token = req.cookies.ssid;
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
     const search = await Profiles.findById(decoded.id);
     const response = {};
@@ -213,7 +215,7 @@ Controller.verifyCookie = async (req, res, next) => {
   }
   catch(err){
     console.error('You got the wrong flavor of cookies');
-    return next(err);
+    return next({error: err});
   }
 }
 module.exports = Controller;

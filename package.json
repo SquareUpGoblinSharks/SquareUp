@@ -61,6 +61,7 @@
     "postcss-loader": "^7.3.3",
     "postcss-preset-env": "^9.3.0",
     "react": "^18.2.0",
+    "react-cookie": "^6.1.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.48.2",
     "react-redux": "^8.1.3",
