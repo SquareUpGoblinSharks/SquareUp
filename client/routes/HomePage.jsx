@@ -1,7 +1,7 @@
 // react/redux
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers, getUsers, login } from '../state/userSlice.js';
+import { getAllUsers, getUsers, login, assignToken } from '../state/userSlice.js';
 
 // components
 import Profile from '../components/Profile.jsx';
@@ -18,17 +18,29 @@ import client from '../lib/client.js';
 const HomePage = () => {
   const dispatch = useDispatch();
   // const {users} = useSelector(state => state.userSlice);
+  const { userState, ssid } = useAuth(null, '/Login');
+  
 
-  useEffect(() => {
+  useEffect( () => {
     dispatch(getAllUsers());
   }, []);
+
+  useEffect(()=>{
+    if (userState) {
+      dispatch(login(userState));
+      dispatch(assignToken(ssid));
+    }
+  },[userState]);
+
+
+
 
   // // Testing - can be removed later
   // useEffect( () => {
   //   console.log(users[0]);
   // }, [users])
 
-  useAuth(null, '/Login');
+  
   return (
     <BackgroundWrapper>
       <CenteredWrapper>

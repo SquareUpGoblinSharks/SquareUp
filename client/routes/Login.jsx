@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getUsers, login } from '../state/userSlice.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUsers, login, loginUser } from '../state/userSlice.js';
 import { useForm } from 'react-hook-form';
 
 import Button from '../components/Button.jsx';
@@ -16,19 +16,30 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  useAuth('/home');
+  const { setCookie, success, failure, ssid } = useAuth('/home')
 
+  const userStatus = useSelector(state => state.userSlice.userStatus);
+  const error = useSelector(state => state.userSlice.error);
+  const user = useSelector(state => state.userSlice.user)
+  const userToken = useSelector(state => state.userSlice.userToken);
+
+  if (userStatus === 'succeeded') {
+    console.log(user)
+  }
   const onSubmit = async (data) => {
-    try {
-      const response = await client.post('/login', data, {});
-      if (response.status === 200) {
-        dispatch(login(response.data));
-        navigate('/home');
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    dispatch(loginUser(data));
   };
+
+  useEffect(()=>{
+    if (userToken) {
+      setCookie(userToken);
+      success();
+    } else if (ssid) {
+      success();
+    } else {
+      failure(0)
+    }
+  }, [userToken]);
 
   return (
     <BackgroundWrapper>
