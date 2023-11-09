@@ -43,7 +43,7 @@ const useAuth = (navigateSuccess, navigateFailure) => {
           }
         })
         .catch(err => {
-          console.log('error was caught', err.response.data)
+          // console.log('error was caught', err.response)
           navigateWrapper(navigateFailure, true);
         })
     }

@@ -43,7 +43,7 @@ const Profile = () => {
     return (
       <div className="bg-central-blue m-5 p-5 border-2 overflow-scroll max-h-full rounded-lg border-gray-700 h-[90vh]">
         <div className="flex align-center justify-center p-2">
-          <h1 className="text-2xl font-bold text-slate-800 my-2">
+          <h1 className="text-xl font-bold text-white">
             {lastUser.username}
           </h1>
         </div>
@@ -57,15 +57,16 @@ const Profile = () => {
 
         <ul className="grid grid-cols-2 gap-4 text-sm p-4">
           <UserProfileDetails
-            value={lastUser.fightingStyle}
+            title={'Fighting Style'}
+            value={lastUser.fightingStyle ? lastUser.fightingStyle : 'N/A'}
             additionalClasses={"col-span-2"}
           />
-          <UserProfileDetails value={lastUser.age} />
-          <UserProfileDetails value={lastUser.sex} />
-          <UserProfileDetails value={lastUser.weight} />
-          <UserProfileDetails value={lastUser.height} />
-          <UserProfileDetails value={lastUser.totalWins} />
-          <UserProfileDetails value={lastUser.totalLosses} />
+          <UserProfileDetails title={'Age'} value={lastUser.age ? lastUser.age : 'N/A'} />
+          <UserProfileDetails title={'Sex'} value={lastUser.sex ? lastUser.sex : 'N/A'} />
+          <UserProfileDetails title={'Weight'} value={lastUser.weight ? lastUser.weight : 'N/A'} />
+          <UserProfileDetails title={'Height'} value={lastUser.height ? lastUser.height : 'N/A'} />
+          <UserProfileDetails title={'Wins'} value={lastUser.totalWins} />
+          <UserProfileDetails title={'Losses'} value={lastUser.totalLosses} />
         </ul>
 
         <ButtonBar
