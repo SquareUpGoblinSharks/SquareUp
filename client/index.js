@@ -5,6 +5,8 @@ import App from './App.jsx';
 import store from './store.js';
 import './styles.scss';
 
+const root = createRoot(document.getElementById('root'));
+
 root.render(
   <Provider store={store}>
     <App />
