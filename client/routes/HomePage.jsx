@@ -1,5 +1,5 @@
 // react/redux
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers, getUsers, login, assignToken } from '../state/userSlice.js';
 
@@ -18,21 +18,19 @@ import client from '../lib/client.js';
 const HomePage = () => {
   const dispatch = useDispatch();
   // const {users} = useSelector(state => state.userSlice);
-  const { getCookie } = useAuth(null, '/Login');
+  const { userState, ssid } = useAuth(null, '/Login');
+  
+
   useEffect( () => {
     dispatch(getAllUsers());
   }, []);
 
   useEffect(()=>{
-    client.get('/verifyCookie')
-      .then(resp=> {
-        console.log(resp)
-        if (resp.data.verified === true) {
-          dispatch(login(resp.data.data))
-          dispatch(assignToken(getCookie()))
-        }
-      })
-  },[]);
+    if (userState) {
+      dispatch(login(userState));
+      dispatch(assignToken(ssid));
+    }
+  },[userState]);
 
 
 

@@ -70,7 +70,6 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
         Controller.verifyUser, 
         cookieController.produceJWT, 
         (req, res) => {
-        console.log('login end of Route', res.locals.userInfo, res.locals.token)
         
         res.status(200).json({userInfo: res.locals.userInfo, token: res.locals.token});
       });

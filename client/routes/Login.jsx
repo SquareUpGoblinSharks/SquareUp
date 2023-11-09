@@ -16,7 +16,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const { setCookie, success, failure } = useAuth('/home')
+  const { setCookie, success, failure, ssid } = useAuth('/home')
 
   const userStatus = useSelector(state => state.userSlice.userStatus);
   const error = useSelector(state => state.userSlice.error);
@@ -33,6 +33,8 @@ const Login = () => {
   useEffect(()=>{
     if (userToken) {
       setCookie(userToken);
+      success();
+    } else if (ssid) {
       success();
     } else {
       failure(0)
