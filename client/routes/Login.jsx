@@ -1,8 +1,9 @@
 import React from 'react';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getUsers, login } from '../state/userSlice.js';
 import { useForm } from 'react-hook-form';
+
 
 import Button from '../components/Button.jsx';
 import BackgroundWrapper from '../components/BackgroundWrapper.jsx';
@@ -10,17 +11,13 @@ import CenteredWrapper from '../components/CenteredWrapper.jsx';
 
 import client from '../lib/client.js';
 import Form from '../components/Form.jsx';
+import useAuth from '../lib/useAuth.js';
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-
-  /**
-   * When the submit button is clicked, initiates a fetch request to server.
-   * Fetch request should return user information.
-   * If fetch request succeeds and state is updated with user info, redirect to '/'.
-   */
+  useAuth('/home')
 
   const onSubmit = async (data) => {
     try {

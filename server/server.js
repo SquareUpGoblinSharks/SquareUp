@@ -107,8 +107,8 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
       });
       
       app.use((err, req, res, next) => {
-        console.log(err);
-        res.status(500).send({ error: err });
+        console.log('global error', err); 
+        res.status(500).send(JSON.stringify(err.error));
       });
         
         app.listen(PORT, () => {

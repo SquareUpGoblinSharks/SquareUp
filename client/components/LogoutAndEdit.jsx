@@ -1,15 +1,11 @@
 import React from 'react';
-import { redirect, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getUsers, login } from '../state/userSlice.js';
-import { useForm } from 'react-hook-form';
-import client from '../lib/client';
+import useAuth from '../lib/useAuth.js';
 
 const LogoutAndEdit = () => {
-  const navigate = useNavigate();
+
+  const { failure } = useAuth();
   function clickHandler() {
-    client.get('/logout');
-    navigate('/');
+    failure('/');
   }
   
   return (
