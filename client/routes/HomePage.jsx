@@ -20,16 +20,17 @@ import { data } from 'autoprefixer';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const {users} = useSelector(state => state.userSlice);
+  // const {users} = useSelector(state => state.userSlice);
 
   useEffect( () => {
     dispatch(getAllUsers());
   }, []);
 
 
-  useEffect( () => {
-    console.log(users[0]);
-  }, [users])
+  // // Testing - can be removed later
+  // useEffect( () => {
+  //   console.log(users[0]);
+  // }, [users])
 
   return (
     <BackgroundWrapper>

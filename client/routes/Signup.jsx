@@ -24,11 +24,7 @@ const Signup = () => {
       const resp = await client.post('/signup', body);
       if (resp.status === 200) {
         dispatch(login(resp.data));
-        const allUsersResponse = await client.get('/Leaderboard');
-        if (allUsersResponse.status === 200) {
-          dispatch(getUsers(allUsersResponse.data));
-          navigate('/home');
-        }
+        navigate('/home');
       } else {
         throw new Error(`Signup Handler Status: ${resp.status}`)
         //navigate(0)

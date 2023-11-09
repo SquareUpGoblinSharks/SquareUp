@@ -9,7 +9,7 @@ const Leaderboard = () => {
   //trying to have users at 0 be the index of the top 5 so maybe i would only render users.[0-4], figuring out the logic right now
   // const { name, totalWins, totalLosses } = users;
 
-  console.log('LEADERBOARD', users);
+  // console.log('LEADERBOARD', users);
 
   //sorts users by highest to lowest wins
   useEffect(() => {
@@ -19,7 +19,7 @@ const Leaderboard = () => {
     setUserList(sortedUsers);
   }, [users]);
 
-  console.log('LISTOFUSERS', users);
+  // console.log('LISTOFUSERS', users);
 
   // if (users.length > 0) {
   //   const sortedUsers = [...users]
