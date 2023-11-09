@@ -46,7 +46,7 @@ const Leaderboard = () => {
           <tr></tr>
         </thead>
 
-        <tbody id="leaderBoardBody"></tbody>
+        <tbody id="leaderBoardBody">
         {userList.map((user, index) => (
           <tr key={user._id}>
             <td>{user.name}</td>
@@ -54,6 +54,7 @@ const Leaderboard = () => {
             <td>LOSS: {user.totalLosses}</td>
           </tr>
         ))}
+        </tbody>
       </table>
     </>
   );

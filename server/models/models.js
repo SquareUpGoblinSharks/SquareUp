@@ -65,6 +65,7 @@ const profileSchema = new Schema({
     type: Number,
     default: 0,
   },
+  location: String,
 });
 
 profileSchema.pre("save", function (next) {

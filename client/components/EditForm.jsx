@@ -56,6 +56,10 @@ return (
       <label>Fighting Style:</label>
       <input placeholder={defaultData.fightingStyle} {...register('fightingStyle')} />
     </div>
+    <div className={'flex justify-between mt-1 mb-4'}>
+      <label>Location:</label>
+      <input placeholder={defaultData.location} {...register('fightingStyle')} />
+    </div>
 
     {/*
     <div className={'flex justify-between my-1'}>
