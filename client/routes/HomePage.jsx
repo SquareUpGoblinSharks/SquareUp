@@ -9,6 +9,7 @@ import Leaderboard from '../components/Leaderboard.jsx';
 import UpcomingMatches from '../components/UpcomingMatches';
 import LogoutAndEdit from '../components/LogoutAndEdit.jsx';
 import CenteredWrapper from '../components/CenteredWrapper.jsx';
+import useAuth from '../lib/useAuth.js';
 import BackgroundWrapper from '../components/BackgroundWrapper.jsx';
 import client from '../lib/client.js';
 import userSlice from '../state/userSlice.js';
@@ -32,6 +33,7 @@ const HomePage = () => {
   //   console.log(users[0]);
   // }, [users])
 
+  useAuth(null, '/Login');
   return (
     <BackgroundWrapper>
       <CenteredWrapper>
