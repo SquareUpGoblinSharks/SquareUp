@@ -3,10 +3,14 @@ import { redirect, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getUsers, login } from '../state/userSlice.js';
 import { useForm } from 'react-hook-form';
+import client from '../lib/client';
 
 const LogoutAndEdit = () => {
   const navigate = useNavigate();
-  function clickHandler() {navigate('/')};
+  function clickHandler() {
+    client.get('/logout');
+    navigate('/');
+  }
   
   return (
     <div id='logoutAndEdit'>
