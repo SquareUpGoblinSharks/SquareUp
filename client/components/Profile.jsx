@@ -46,8 +46,10 @@ const Profile = () => {
   // console.log('TESTING------------', users);
 
   return (
-    <div className="profileContainer">
-      <div className="profilePicture"></div>
+    <div className='bg-central-blue m-5 p-5 border-2overflow-scroll max-h-full rounded-lg'>
+      <div className="profilePicture max-w-sm">
+        <img className='max-w-full	h-auto' src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsb2ZmaWNlMV9jdXRlXzNkX2lsbHVzdHJhdGlvbl9vZl9hX2hhcHB5X3RpZ2VyX2N1Yl9wbGF5aV9iMzM0MTQ1NC05NTMxLTQ0NmMtYmFmOC1lN2MwMjNhOWU0MDIucG5n.png" alt="Next Opponent" />
+      </div>
       {lastUser && (
         // <div class='stat-style'>
         <div className="stats">

@@ -35,17 +35,14 @@ const HomePage = () => {
   return (
     <BackgroundWrapper>
       <CenteredWrapper>
-        <div className='flex items-stretch justify-center'>
+        <div className='flex items-stretch justify-center max-h-full'>
           <Leaderboard />
-          <div className="middleContainer">
-            <Profile />
-          </div>
-          <div className="rightContainer">
-            <LogoutAndEdit />
-            <UpcomingMatches />
-          </div>
+          <Profile />
+          <UpcomingMatches />
+          <LogoutAndEdit />
         </div>
       </CenteredWrapper>
+      <h1 className=''>Test</h1>
     </BackgroundWrapper>
 
   );

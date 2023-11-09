@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 const UpcomingMatches = () => {
   return (
-    <>
+    <div  className='bg-dark-slate-green m-5 p-5 border-2overflow-scroll max-h-full rounded-lg'>
       <div className="upcomingMatches">
         <h2>UPCOMING MATCHES</h2>
 
@@ -18,7 +18,7 @@ const UpcomingMatches = () => {
           <tbody id="leaderBoardBody"></tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 };
 

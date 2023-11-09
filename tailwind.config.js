@@ -17,6 +17,7 @@ module.exports = {
         'sea-green' : '#32936F',
         'myrtle-green' : '#387D7A',
         'dark-slate-green' : '#395E66',
+        'central-blue': '#0092ff',
       }
     }
   },

@@ -4,15 +4,10 @@ import Button from './Button.jsx';
 
 const ButtonBar = ({ passHandleClick }) => {
   return (
-    <div className="buttonBar">
+    <div className="flex justify-around">
       <Button 
         value={'SQUARE UP'}
-        primary={false}
-      />
-      <Button 
-        onClickFunc={passHandleClick}
-        value={'PASS'}
-        primary={false}
+        primary={true}
       />
       <Button 
         onClickFunc={passHandleClick}

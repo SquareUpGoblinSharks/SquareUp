@@ -15,7 +15,7 @@ const Leaderboard = () => {
   useEffect(() => {
     const sortedUsers = [...users]
       .sort((a, b) => b.totalWins - a.totalWins)
-      .slice(0, 7); // Slice the top 5
+    // .slice(0, 7); // Slice the top 5
     setUserList(sortedUsers);
   }, [users]);
 
@@ -29,33 +29,32 @@ const Leaderboard = () => {
   // }
 
   return (
-    <>
-      <div className=''>
-        <h1>LEADERBOARD</h1>
-        <div className='bg-dark-slate-green m-0 p-5'>
-          <p>Item 1</p>
-          <p>Item 1</p>
-          <p>Item 1</p>
-          <p>Item 1</p>
+    <div className='bg-dark-slate-green m-5 p-5 border-2  max-h-full rounded-lg overflow-hidden' >
+      <div>
+        <h1 className='fixed'>LEADERBOARD</h1>
+        <br />
+        <div className='overflow-scroll'>
+          <table>
+            <thead>
+              <tr></tr>
+            </thead>
+
+            <tbody id="leaderBoardBody"></tbody>
+            {userList.map((user, index) => (
+              <tr key={user._id}>
+                <td>{user.name}</td>
+                <td>WINS: {user.totalWins}</td>
+                <td>LOSS: {user.totalLosses}</td>
+              </tr>
+            ))}
+          </table>
+
         </div>
       </div>
 
 
-      <table>
-        <thead>
-          <tr></tr>
-        </thead>
 
-        <tbody id="leaderBoardBody"></tbody>
-        {userList.map((user, index) => (
-          <tr key={user._id}>
-            <td>{user.name}</td>
-            <td>WINS: {user.totalWins}</td>
-            <td>LOSS: {user.totalLosses}</td>
-          </tr>
-        ))}
-      </table>
-    </>
+    </div>
   );
 };
 
