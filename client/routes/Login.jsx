@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getUsers, login } from '../state/userSlice.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUsers, login, loginUser } from '../state/userSlice.js';
 import { useForm } from 'react-hook-form';
 
 
@@ -19,12 +19,19 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
   useAuth('/home')
 
+  const userStatus = useSelector(state => state.userSlice.userStatus);
+  const error = useSelector(state => state.userSlice.error);
+  const user = useSelector(state => state.userSlice.user)
+
+  if (userStatus === 'succeeded') {
+    console.log(user)
+  }
   const onSubmit = async (data) => {
     try {
       const response = await client.post('/login', data, {})
       if (response.status === 200) {
         dispatch(login(response.data));
-          navigate('/home');
+          //navigate('/home');
         }
     } catch (error) {
       console.error(error);
