@@ -1,6 +1,6 @@
 import React from 'react'
 import CenteredWrapper from '../components/CenteredWrapper';
-import BackgroundWrapper from '../components/HexGreenBGWrapper'
+import BackgroundWrapper from '../components/BackgroundWrapper'
 import Button from '../components/Button';
 
 const Prototype = props => {

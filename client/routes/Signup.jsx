@@ -5,7 +5,7 @@ import axios from 'axios';
 import { login, getUsers } from '../state/userSlice';
 import { useForm } from 'react-hook-form';
 
-import HexGreenBGWrapper from '../components/HexGreenBGWrapper.jsx';
+import BackgroundWrapper from '../components/BackgroundWrapper.jsx';
 import CenteredWrapper from '../components/CenteredWrapper.jsx';
 import SignupForm from '../components/SignupForm.jsx';
 
@@ -71,7 +71,7 @@ const Signup = () => {
 
 
   return (
-    <HexGreenBGWrapper>
+    <BackgroundWrapper>
       <CenteredWrapper>
         {/*signup */}
         <div class="flex bg-orange-200 p-10 rounded-lg shadow-lg flex-column items-center">
@@ -81,7 +81,7 @@ const Signup = () => {
           </div>
         </div>
       </CenteredWrapper>
-    </HexGreenBGWrapper>
+    </BackgroundWrapper>
   );
 };
 

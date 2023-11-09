@@ -5,7 +5,7 @@ import { getUsers, login } from '../state/userSlice.js';
 import { useForm } from 'react-hook-form';
 
 import Button from '../components/Button.jsx';
-import BackgroundWrapper from '../components/HexGreenBGWrapper.jsx';
+import BackgroundWrapper from '../components/BackgroundWrapper.jsx';
 import CenteredWrapper from '../components/CenteredWrapper.jsx';
 
 import client from '../lib/client.js';

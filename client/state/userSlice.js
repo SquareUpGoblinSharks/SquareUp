@@ -80,7 +80,7 @@ export const userSlice = createSlice({
         state.userStatus = 'pending';
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload;
         state.userStatus = 'success';
       })
       .addCase(loginUser.rejected, (state, action) => {
@@ -91,7 +91,7 @@ export const userSlice = createSlice({
         state.allUsersStatus = 'pending';
       })
       .addCase(getAllUsers.fulfilled, (state,action) => {
-         state.users = action.payload.user; 
+         state.users = action.payload; 
          state.userStatus = 'success';
       })
       .addCase(getAllUsers.rejected, (state, action) => {
