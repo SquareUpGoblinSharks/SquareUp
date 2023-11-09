@@ -49,7 +49,7 @@ const Profile = () => {
     <div className="profileContainer">
       <div className="profilePicture"></div>
       {lastUser && (
-        // <div class='stat-style'>
+
         <div className="stats">
           <li>Username: {lastUser.username}</li>
           <li>Age: {lastUser.age}</li>
