@@ -30,25 +30,31 @@ const Leaderboard = () => {
 
   return (
     <>
-      <div className="leaderboard">
+      <div className=''>
         <h1>LEADERBOARD</h1>
-        <div id="leaderboardContainer">
-          <table>
-            <thead>
-              <tr></tr>
-            </thead>
-
-            <tbody id="leaderBoardBody"></tbody>
-            {userList.map((user, index) => (
-              <tr key={user._id}>
-                <td>{user.name}</td>
-                <td>WINS: {user.totalWins}</td>
-                <td>LOSS: {user.totalLosses}</td>
-              </tr>
-            ))}
-          </table>
+        <div className='bg-dark-slate-green m-0 p-5'>
+          <p>Item 1</p>
+          <p>Item 1</p>
+          <p>Item 1</p>
+          <p>Item 1</p>
         </div>
       </div>
+
+
+      <table>
+        <thead>
+          <tr></tr>
+        </thead>
+
+        <tbody id="leaderBoardBody"></tbody>
+        {userList.map((user, index) => (
+          <tr key={user._id}>
+            <td>{user.name}</td>
+            <td>WINS: {user.totalWins}</td>
+            <td>LOSS: {user.totalLosses}</td>
+          </tr>
+        ))}
+      </table>
     </>
   );
 };
