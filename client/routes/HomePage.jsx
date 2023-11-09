@@ -44,7 +44,6 @@ const HomePage = () => {
           <LogoutAndEdit />
         </div>
       </CenteredWrapper>
-      <h1 className=''>Test</h1>
     </BackgroundWrapper>
 
   );

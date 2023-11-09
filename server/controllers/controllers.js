@@ -13,7 +13,7 @@ Controller.getProfile = (req, res, next) => {
     .exec()
     .then((data) => {
       res.locals.profiles = data;
-      console.log('Count USER DATA:', data.length);
+      // console.log('Count USER DATA:', data.length);
       return next();
     })
     .catch((err) => {

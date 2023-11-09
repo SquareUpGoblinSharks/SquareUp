@@ -1,5 +1,6 @@
 import React from 'react';
 import useAuth from '../lib/useAuth.js';
+import Button from './Button.jsx';
 
 const LogoutAndEdit = () => {
 
@@ -9,10 +10,10 @@ const LogoutAndEdit = () => {
   }
   
   return (
-    <div id='logoutAndEdit' className='border-2 border-red-200 z-10'>
-      <button id="edit" role="button" type='submit'>EDIT PROFILE</button>
+    <div id='logoutAndEdit' className='z-10 self-start'>
+      <Button value={'Edit Profile'}  primary={true}/>
       <br/>
-      <button id="logout" onClick={clickHandler} role="button" type='submit'>LOGOUT</button>
+      <Button onClickFunc={clickHandler} value={'Logout'}  primary={false}/>
     </div>
   );
 };
