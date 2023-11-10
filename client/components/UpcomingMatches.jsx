@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 
 const UpcomingMatches = () => {
   const matches = useSelector(({ userSlice }) => userSlice.upcomingMatches);
-  console.log(matches);
+  // console.log(matches);
   const matchElems = matches.map((element) => {
-    console.log("hello from forEach", element.name);
+    // console.log("hello from forEach", element.name);
     return (
       <div className={"flex justify-between"} key={crypto.randomUUID()}>
         <div className="font-medium text-white">{element.name}</div>
@@ -15,7 +15,7 @@ const UpcomingMatches = () => {
       </div>
     );
   });
-  console.log(matchElems);
+  // console.log(matchElems);
   return (
     <div className="bg-dark-slate-green m-5 p-5 border-2 border-gray-700 overflow-scroll h-[90vh] rounded-lg">
       <div className="upcomingMatches">

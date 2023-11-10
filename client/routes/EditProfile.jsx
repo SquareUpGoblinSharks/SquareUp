@@ -49,8 +49,9 @@ const EditProfile = () => {
     <BackgroundWrapper>
       <CenteredWrapper>
         {/*signup */}
-        <div className="flex bg-orange-200 p-10 rounded-lg shadow-lg flex-column items-center">
+        <div className="flex bg-central-blue p-10 rounded-lg shadow-lg flex-column items-center">
           <div className="flex justify-center items-center">
+          {/* <h1 className='text-xl font-bold text-white bg-dark-slate-green p-2 px-4 sticky top-0 z-10'>Edit Profile</h1> */}
             {profileData ? <EditForm defaultData={profileData} onSubmitHandler={EditProfileHandler} /> : <></>}
           </div>
         </div>

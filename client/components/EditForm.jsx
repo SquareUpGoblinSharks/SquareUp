@@ -15,15 +15,7 @@ const EditProfileForm = ({onSubmitHandler, defaultData}) => {
   }
 
 return (
-  <form className={'flex flex-col text-orange-500'} onSubmit={handleSubmit(onSubmit)}> 
-    {/*<div className={'flex justify-between my-1'}>
-      <label>Username:</label>
-      <input {...register('username')} />
-    </div>
-    <div className={'flex justify-between my-1'}>
-      <label>Password:</label>
-      <input className={"w-45"} {...register('password')} type='password'/>
-    </div>*/}
+  <form className={'flex flex-col bg-central-blue p-5 rounded-lg'} onSubmit={handleSubmit(onSubmit)}> 
     <div className={'flex justify-between my-1'}>
       <label>Name:</label>
       <input placeholder={defaultData.name} className={"w-45"} {...register('name')} />
