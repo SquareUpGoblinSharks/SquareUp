@@ -34,4 +34,7 @@ describe('CenteredWrapper unit tests', ()=>{
   test('should render all children correctly', () => {
     expect(wrapper.getAllByText('TEST CHILD').length).toBe(5);
   })
+  test('should match snapshot', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 });

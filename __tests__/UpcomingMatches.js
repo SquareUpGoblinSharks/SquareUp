@@ -45,6 +45,9 @@ describe('Unit Testing Upcoming Matches', () => {
     expect(text.getByText('Name')).toBeInTheDocument()
     expect(text.getByText('W/L')).toBeInTheDocument()
   });
+  test('should match snapshot', () => {
+    expect(text).toMatchSnapshot();
+  });
   // test('addMatch increases the number of matches displayed', () => {
   //   const dispatch = useDispatch();
   //   dispatch(addMatch(testUser));
