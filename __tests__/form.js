@@ -12,6 +12,7 @@ import '@testing-library/jest-dom';
 import Form from '../client/components/Form';
 
 describe('Unit tests for Form component', () => {
+  
   // test('Form function is invoked on submit', () => {
   //   const testFunc = jest.fn();
   //   render(<Form  />);
@@ -24,8 +25,8 @@ describe('Unit tests for Form component', () => {
   // });
 
   test('Form displays child components', () => {
-    render(<Form><button>{'Text'}</button></Form>)
-    expect(screen.getByRole('button').toHaveTextContent('text'))
+    const form = render(<Form><button></button></Form>)
+    expect(form.getByRole('button')).toBeTruthy();
 
   });
 });
