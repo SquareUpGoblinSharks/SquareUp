@@ -29,12 +29,12 @@ describe('Unit tests for button component', () => {
   test('Button has correct color when primary', () => {
     render(<Button primary={true} />);
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('bg-blue-600');
+    expect(button).toHaveClass('bg-jade');
   });
 
   test('Button has correct color when secondary', () => {
     // render new button with primary set to false
     render(<Button value={'test2'} primary={false} />);
-    expect(screen.getByRole('button')).toHaveClass('bg-blue-300');
+    expect(screen.getByRole('button')).toHaveClass('bg-myrtle-green');
   });
 });
