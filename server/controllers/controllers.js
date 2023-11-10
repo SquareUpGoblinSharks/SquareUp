@@ -18,7 +18,7 @@ Controller.getProfile = (req, res, next) => {
     })
     .catch((err) => {
       return next({
-        log: 'Error in controller.getProfile middleware',
+        log: `Controller.getProfile: Error in middleware: ${err}`,
         message: {
           err: 'there was an error grabbing profile data',
         },
@@ -42,7 +42,7 @@ Controller.updateWinsLosses = (req, res, next) => {
     })
     .catch((err) => {
       return next({
-        log: 'Error in updating updateWinsandLosses in controllers',
+        log: `Controller.updateWinsLosses: Error in updating: ${err}`,
         message: {
           err: 'there was an error in updating wins and losses',
         },
@@ -61,7 +61,7 @@ Controller.updateWinsLosses = (req, res, next) => {
     })
     .catch((err) => {
       return next({
-        log: 'Error in updating updateWinsandLosses in controllers',
+        log: `Controller.updateWinsLosses: Error in updating: ${err}`,
         message: {
           err: 'there was an error in updating wins and losses',
         },
@@ -104,7 +104,7 @@ Controller.createUser = (req, res, next) => {
     })
     .catch((err) => {
       return next({
-        log: `Error in controller.createProfile middleware: ${err}`,
+        log: `Controller.createUser: Error in creatingUser: ${err}`,
         message: {
           err: 'There was an error when creating your profile',
           status: 500,
@@ -121,7 +121,7 @@ Controller.verifyUser = async (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
     return next({
-      log: "Missing username or password in controller.verifyUser",
+      log: "Controller.verifyUser: Missing username or password",
       status: 400,
       message: { error: "Username and/or password cannot be empty" },
     });
@@ -131,7 +131,7 @@ Controller.verifyUser = async (req, res, next) => {
 
     if (!user) {
       return next({
-        log: "User does not exist in controller.verifyUser",
+        log: "Controller.verifyUser: User does not exist",
         status: 400,
         message: { error: "Username and/or password are incorrect" },
       });
@@ -140,7 +140,7 @@ Controller.verifyUser = async (req, res, next) => {
       const result = await bcrypt.compare(password, user.password);
       if (!result) {
         return next({
-          log: "Password does not match controller.verifyUser",
+          log: "Controller.verifyUser: Password does not match controller",
           status: 400,
           message: { error: "Username and/or password are incorrect" },
         });
@@ -153,7 +153,7 @@ Controller.verifyUser = async (req, res, next) => {
     }
   } catch (err) {
     return next({
-      log: `An error occurred in controller.verifyUser: ${err}`,
+      log: `Controller.verifyUser: An error occurred in controller.verifyUser: ${err}`,
       status: 500,
       message: { err: `An error occurred` },
     });
@@ -161,7 +161,8 @@ Controller.verifyUser = async (req, res, next) => {
 };
 
 Controller.updateUser = async (req, res, next) => {
-  const id = req.cookie.ssid;
+  const token = req.cookies.ssid;
+  const decoded = jwt.verify(token, process.env.JWT_SECRET)
   const {
     name,
     sex,
@@ -172,15 +173,16 @@ Controller.updateUser = async (req, res, next) => {
     location,
   } = req.body;
   try{
-    const search = await Profiles.findOne({_id: id});
+    const search = await Profiles.findById(decoded.id);
     if(search){
-      search.name = name;
-      search.sex = sex;
-      search.height = height;
-      search.weight = weight;
-      search.age = age;
-      search.fightingStyle = fightingStyle;
-      search.location = location;
+      search.name = name.length > 0 ? name : search.name;
+      search.sex = sex.length > 0 ? sex : search.sex;
+      search.height = height.length > 0 ? height: search.height;
+      search.weight = weight.length > 0 ? weight: search.height;
+      search.age = age.length > 0 ? age : search.age;
+      search.fightingStyle = fightingStyle.length > 0 ? fightingStyle : search.fightingStyle;
+      search.location = location.length ? location: search.location;
+
       await search.save();
       return next();
     }
@@ -191,15 +193,14 @@ Controller.updateUser = async (req, res, next) => {
   }
   catch (err) {
     return next({
-      log: 'An error occured in userController.updateUser',
-      message: 'update failed'
+      log: `Controller.updateUser: An error occured: ${err}`,
+      message: { err: `update failed` }
     })
   }
 }
 
 Controller.verifyCookie = async (req, res, next) => {
   try {
-    console.log(req.cookies)
     const token = req.cookies.ssid;
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
     const search = await Profiles.findById(decoded.id);
@@ -217,8 +218,53 @@ Controller.verifyCookie = async (req, res, next) => {
     return next();
   }
   catch(err){
-    console.error('You got the wrong flavor of cookies');
-    return next({error: err});
+    return next({
+      log: `Controller.verifyCookie: An error occured: ${err}`,
+      message: { err: `cookie not verified` }
+    });
   }
 }
+
+Controller.deleteUser = async (req, res, next) => {
+  const { username } = req.body;
+  try {
+    const result = await Profiles.deleteOne({ username: username });
+    if (result.deletedCount === 0) {
+      return next({
+        log: "User does not exist",
+        status: 400,
+        message: { error: "Failed to delete user" },
+      });
+    }
+    return next();
+  } catch (err) {
+    return next({
+      log: `An error occurred in controller.DeleteUser: ${err}`,
+      status: 500,
+      message: { err: `You have deleted reality. Goodbye.` },
+    });
+  }
+};
+
+Controller.getUser = async (req, res, next) => {
+  const { username } = req.body;
+  try {
+    const result = await Profiles.findOne({ username: username });
+    if (!result) {
+      return next({
+        log: "User does not exist",
+        status: 400,
+        message: { error: "Failed to retrieve user" },
+      });
+    }
+    res.locals.userInfo = result;
+    return next();
+  } catch (err) {
+    return next({
+      log: `An error occurred in controller.getUser: ${err}`,
+      status: 500,
+      message: { err: `GET good` },
+    });
+  }
+};
 module.exports = Controller;

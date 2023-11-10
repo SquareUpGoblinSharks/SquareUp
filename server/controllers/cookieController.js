@@ -9,9 +9,8 @@ cookieController.setSSIDCookie = (req, res, next) => {
   console.log('baking cookies...')
   // console.log(res.locals.newUser);
   try{
-    const token = jwt.sign({id: res.locals._id}, process.env.JWT_SECRET, {expiresIn: '1hr'} )
     // console.log(id);
-    res.cookie('ssid', token, {
+    res.cookie('ssid', res.locals.token, {
       httpOnly: false,
       secure: true,
     });
@@ -19,8 +18,30 @@ cookieController.setSSIDCookie = (req, res, next) => {
   }
   catch(err){
     console.error('someone ate the cookies')
-    return next(err);
+    return next({
+      log: `cookieController.setSSIDCookie: An error occured: ${err}`,
+      message: { err: `cookieUpdateFailed` }
+    });
   }
 }
+
+
+cookieController.produceJWT = (req, res, next ) => {
+// write code here
+if(res.locals.verify == false) return next();
+try{
+  const token = jwt.sign({id: res.locals._id}, process.env.JWT_SECRET, {expiresIn: '1hr'} )
+  // console.log(id);
+  res.locals.token = token;
+  return next();
+}
+catch(err){
+  return next({
+    log: `cookieController.produceJWT: An error occured: ${err}`,
+    message: { err: `cookieUpdateFailed` }
+  });
+}
+
+};
 
 module.exports = cookieController;
