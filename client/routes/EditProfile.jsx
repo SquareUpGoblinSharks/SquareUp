@@ -32,6 +32,7 @@ const EditProfile = () => {
   const EditProfileHandler = async (data) => {
     const { profilePicture, ...body } = data;
     try {
+      console.log('body', body)
       const resp = await client.patch('/editProfile', body);
       if (resp.status === 200) {
         dispatch(login(body));

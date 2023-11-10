@@ -9,8 +9,9 @@ import Button from './Button';
 const EditProfileForm = ({onSubmitHandler, defaultData}) => {
   const {register, handleSubmit } = useForm();
   const [gender, setGender] = useState(defaultData.sex);
+  
   const onSubmit = data => {
-
+    console.log('on submit')
     onSubmitHandler(data);
   }
 

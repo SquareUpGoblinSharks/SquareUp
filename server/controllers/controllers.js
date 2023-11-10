@@ -136,7 +136,7 @@ Controller.verifyUser = async (req, res, next) => {
         message: { error: "Username and/or password are incorrect" },
       });
     } else {
-      
+      console.log(password, user.password)
       const result = await bcrypt.compare(password, user.password);
       if (!result) {
         return next({
@@ -162,28 +162,13 @@ Controller.verifyUser = async (req, res, next) => {
 
 Controller.updateUser = async (req, res, next) => {
   const token = req.cookies.ssid;
-  const decoded = jwt.verify(token, process.env.JWT_SECRET)
-  const {
-    name,
-    sex,
-    height,
-    weight,
-    age,
-    fightingStyle,
-    location,
-  } = req.body;
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  const acceptedKeys = ['name', 'sex', 'height', 'weight', 'age', 'fightingStyle', 'location'];
+  const nonEmptyBodies = Object.fromEntries(Object.entries(req.body).filter(([k,v]) => {v.length > 0 && v !== null && acceptedKeys.includes(k)}))
+  
   try{
-    const search = await Profiles.findById(decoded.id);
+    const search = await Profiles.findById(decoded.id, nonEmptyBodies, {});
     if(search){
-      search.name = name.length > 0 ? name : search.name;
-      search.sex = sex.length > 0 ? sex : search.sex;
-      search.height = height.length > 0 ? height: search.height;
-      search.weight = weight.length > 0 ? weight: search.height;
-      search.age = age.length > 0 ? age : search.age;
-      search.fightingStyle = fightingStyle.length > 0 ? fightingStyle : search.fightingStyle;
-      search.location = location.length ? location: search.location;
-
-      await search.save();
       return next();
     }
     else {
