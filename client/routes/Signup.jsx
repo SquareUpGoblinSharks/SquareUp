@@ -66,7 +66,7 @@ const Signup = () => {
     <BackgroundWrapper>
       <CenteredWrapper>
         {/*signup */}
-        <div className="flex bg-orange-200 p-10 rounded-lg shadow-lg flex-column items-center">
+        <div className="flex bg-central-blue p-10 rounded-lg shadow-lg flex-column items-center">
           <div className="flex justify-center items-center">
             <SignupForm onSubmitHandler={SignupHandler} />
           </div>

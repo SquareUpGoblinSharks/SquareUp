@@ -19,7 +19,8 @@ const SignupForm = ({onSubmitHandler}) => {
 
 
 return (
-  <form className={'flex flex-col text-orange-500'} onSubmit={handleSubmit(onSubmit)}> 
+  
+  <form className={'flex flex-col '} onSubmit={handleSubmit(onSubmit)}> 
     <div className={'flex justify-between my-1'}>
       <label>Username:</label>
       <input {...register('username')} />

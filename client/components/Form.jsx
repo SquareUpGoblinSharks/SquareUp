@@ -10,9 +10,9 @@ const Form = ({additionalClasses, onSubmit, inputDetails, children}) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={`flex flex-col items-center ${additionalClasses}`}
+      className={`flex flex-col items-center bg-central-blue p-5 rounded-lg ${additionalClasses}`}
     >
-      {inputDetails.map( (detailsObj, index) => {
+      {inputDetails && inputDetails.map( (detailsObj, index) => {
         return (
           <FormInput
             key={index}
