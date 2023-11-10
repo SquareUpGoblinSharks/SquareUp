@@ -54,15 +54,11 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
         // console.log('testing get route');
         res.status(200).json(res.locals.profiles);
       });
-      app.get('/secret', (req, res) => {
-        res.redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-      })
 
       app.get('/logout', (req, res) => {
         console.log('clearing cookies...')
         res.status(200).clearCookie('ssid');
       })
-
 
       app.patch('/editProfile', Controller.updateUser, (req, res) => {
         console.log('update request completed');
@@ -73,6 +69,12 @@ app.use('/client', express.static(path.resolve(__dirname, '../client')));
       app.post('/delete', Controller.deleteUser, (req, res) => {
         res.status(200).json({ message: 'User deleted successfully' });
       });
+      app.post('/getUser', Controller.getUser, (req,res) =>{
+        res.status(200).json(res.locals.userInfo);
+      })
+      app.get('/secret', (req, res) => {
+        res.redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+      })
 
       // error handling
       app.use((req, res) => {

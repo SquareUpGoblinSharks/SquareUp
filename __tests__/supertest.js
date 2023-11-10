@@ -38,6 +38,32 @@ describe("Route integration", () => {
           .expect(200));
     });
   });
+  describe("/login", () => {
+    describe("POST", () => {
+      it("responds with 200 status and sends user json object", () =>
+        request(server)
+          .post("/login")
+          .send({
+            "username": `uhohitsgio`,
+            "password": `kentoldmeto`,
+          })
+          .expect("Content-Type", 'application/json; charset=utf-8')
+          .expect(200));
+    });
+  });
+  describe("/login", () => {
+    describe("POST", () => {
+      it("responds with 200 status and sends user json object", () =>
+        request(server)
+          .post("/login")
+          .send({
+            "username": `uhohitsgio`,
+            "password": `kentoldmeto`,
+          })
+          .expect("Content-Type", 'application/json; charset=utf-8')
+          .expect(200));
+    });
+  });
 });
 
 //       it('markets from "DB" json are in body of response', async () => {

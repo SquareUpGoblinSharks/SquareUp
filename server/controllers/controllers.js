@@ -246,4 +246,25 @@ Controller.deleteUser = async (req, res, next) => {
   }
 };
 
+Controller.getUser = async (req, res, next) => {
+  const { username } = req.body;
+  try {
+    const result = await Profiles.findOne({ username: username });
+    if (!result) {
+      return next({
+        log: "User does not exist",
+        status: 400,
+        message: { error: "Failed to retrieve user" },
+      });
+    }
+    res.locals.userInfo = result;
+    return next();
+  } catch (err) {
+    return next({
+      log: `An error occurred in controller.getUser: ${err}`,
+      status: 500,
+      message: { err: `GET good` },
+    });
+  }
+};
 module.exports = Controller;
